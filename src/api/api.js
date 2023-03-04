@@ -1,7 +1,24 @@
 import instance from "./instance";
 
-const login = async (userId) => {
-  await instance.post(`/api/user/login`, userId);
+
+
+//////////////로 그 인 ///////
+const loginUser = async (userId) => {
+  return await instance.post(`/api/user/login`, userId);
 };
 
-export { login };
+const signUpUser = async (newbie) => {
+  return await instance.post(`/api/users/signup`, newbie)
+}
+
+///////////////////
+
+const getRoom = async (newForm) => {
+  await instance.get(`/date/`);
+};
+
+const addRoom = async (newForm) => {
+  await instance.post(`/date/`, newForm);
+};
+
+export { addRoom,getRoom,loginUser,signUpUser }
