@@ -21,4 +21,12 @@ const addRoom = async (newForm) => {
   await instance.post(`/date/`, newForm);
 };
 
-export { addRoom,getRoom,loginUser,signUpUser }
+// ---------------곽세령이 짠 거------------------
+const getCard = async (cardData) => {
+  await instance.get(`/api/houses`);
+};
+
+// ---------------곽세령이 짠 거 ------------------
+
+export { addRoom,getRoom,loginUser,signUpUser,getCard }
+
