@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SignUp from "./SignUp";
-import { postLogin } from "../../api/api";
+import { loginUser } from "../../api/api";
 
 const Login = () => {
   const [signUpModal, setSignUpModal] = useState(false);
@@ -52,7 +52,7 @@ const Login = () => {
         <br />
       </div>
 
-      <button onClick={postLogin}>확인</button>
+      <button onClick={loginUser}>확인</button>
       <br />
       <br />
 

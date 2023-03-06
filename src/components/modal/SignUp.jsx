@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { postSignUp } from "../../api/api";
+import { signUpUser } from "../../api/api";
 
 const SignUp = () => {
   const [email, setEmail] = useState();
@@ -48,7 +48,7 @@ const SignUp = () => {
         placeholder="생년월일 0000-00-00"
       />
       <br />
-      <button onClick={postSignUp}>확인</button>
+      <button onClick={signUpUser}>확인</button>
     </div>
   );
 };
