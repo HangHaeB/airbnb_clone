@@ -38,4 +38,5 @@ const getDetail = async (houseid) => {
 };
 
 export {getDetail}
+
 // ---------------곽세령이 짠 거 ------------------

@@ -46,33 +46,33 @@ const PriceBox = styled.div`
 `;
 
 const CardBox = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 400px;
   text-align: center;
 `;
 
 const Title = styled.div`
   text-align: center;
-  margin-top: 800px;
+  margin-top: 15px;
   cursor: pointer;
   font-size: medium;
   font-weight: bold;
 `;
 
 const ImgBox = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
 
   position: relative;
   background-color: gray;
-  border-radius: 10px;
+  border-radius: 15px;
   cursor: pointer;
 `;
 
 const ImgView = styled.img`
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
+  width: 300px;
+  height: 300px;
+  border-radius: 15px;
 `;
 
 const Count = styled.div`
@@ -80,7 +80,7 @@ const Count = styled.div`
   top: 83%;
   left: 74%; */
   font-size: 18px;
-  margin-top: 300px;
+  margin-top: 0px;
 `;
 
 const Star = styled.div`

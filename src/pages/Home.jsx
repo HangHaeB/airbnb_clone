@@ -11,6 +11,7 @@ const Home = () => {
   const { data } = useQuery("card", getCard, {
     onSuccess: (response) => {},
   });
+
   console.log(data);
 
   return (
@@ -30,11 +31,9 @@ const Home = () => {
 export default Home;
 
 const Wrap = styled.div`
-  width: 870px;
+  width: 1000px;
   margin: 0 auto;
-  margin-top: 2rem;
   height: 300px;
   display: flex;
-  gap: 20px;
-  overflow: hidden;
+  gap: 30px;
 `;
