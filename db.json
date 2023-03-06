@@ -1,0 +1,33 @@
+{
+    // "posts": [
+    //     {
+    //         "postId": 1,
+    //         "userNickname" : "nick",
+    //         "title": "제목1",
+    //         "imageUrl":"/images/cancle.png",
+    //         "likesNum" : 3,
+    //         "commentsNum" : 1
+    //       },
+    //       {
+    //         "postId": 2,
+    //         "userNickname" : "candice",
+    //         "title": "제목2",
+    //         "imageUrl":"/images/cancle.png",
+    //         "likesNum" : 3,
+    //         "commentsNum" : 1
+    //       },
+    //       {
+    //         "postId": 3,
+    //         "userNickname" : "candice",
+    //         "title": "제목2",
+    //         "imageUrl":"/images/cancle.png",
+    //         "likesNum" : 3,
+    //         "commentsNum" : 1
+    //       }
+    //   ],
+    "comments": [
+      { "id": 1, "body": "some comment", "postId": 1 }
+    ],
+    "profile": { "name": "typicode" }
+  }
+
