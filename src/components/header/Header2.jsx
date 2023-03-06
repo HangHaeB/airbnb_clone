@@ -1,15 +1,10 @@
 import React from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
-const Header = () => {
+const Header2 = () => {
   return (
     <HeaderContainer>
       <Img src={logo} alt="logo" />
-      <InputContainer>
-        <SearchInput1 />
-        <SearchInput2 type="date" />
-        <SearchInput3 type="date" />
-      </InputContainer>
       <Profile>
         <div>당신의 공간을 에어비앤비하세요</div>
         <div>{localStorage.getItem("name")}</div>
@@ -19,7 +14,7 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header2;
 
 const HeaderContainer = styled.div`
   width: 90vw;
@@ -29,18 +24,7 @@ const HeaderContainer = styled.div`
   height: 40px;
   margin: 0 auto;
 `;
-const InputContainer = styled.div`
-  display: flex;
-`;
-const SearchInput1 = styled.input`
-  width: 200px;
-`;
-const SearchInput2 = styled.input`
-  width: 200px;
-`;
-const SearchInput3 = styled.input`
-  width: 200px;
-`;
+
 const Img = styled.img`
   width: 118px;
 `;
