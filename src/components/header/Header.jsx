@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
+import Login from "../modal/Login";
+
 const Header = () => {
+  const [loginModal, setLoginModal] = useState(false);
+
   return (
     <HeaderContainer>
       <Img src={logo} alt="logo" />
@@ -13,7 +17,14 @@ const Header = () => {
       <Profile>
         <div>당신의 공간을 에어비앤비하세요</div>
         <div>{localStorage.getItem("name")}</div>
-        <button>로그아웃</button>
+        <button
+          onClick={() => {
+            setLoginModal(!loginModal);
+          }}
+        >
+          로그인
+        </button>
+        <div>{loginModal === true ? <Login /> : null}</div>
       </Profile>
     </HeaderContainer>
   );
