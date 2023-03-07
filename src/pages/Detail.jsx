@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./../components/header/Header";
 import Footer from "./../components/footer/Footer";
+
 import { useQuery } from "react-query";
 import { getDetail } from "../api/api";
 import styled from "styled-components";
@@ -19,10 +20,12 @@ const Detail = (item) => {
   });
   // getDetail을 사용, postID와 id가 같은 data를 가져온다.
 
+
   console.log(data);
 
   return (
     <>
+<<<<<<< HEAD
       <>
         <TopBox>
           <Header />
@@ -54,9 +57,19 @@ const Detail = (item) => {
 
       <Review />
 
+=======
+
+      <TopBox>
+        <Header />
+      </TopBox>
+      <TitleBox>{data?.title}</TitleBox>
+      {/* data?.title에 물음표 안붙여주면 에러남. 이거때문에 신경엄청쓰임 */}
+      <SaveButton>♡</SaveButton>
+>>>>>>> e3f8892335fac15279c3d4d78a27e3b84f1a2254
       <BottomBox>
         <Footer />
       </BottomBox>
+
     </>
   );
 };
@@ -78,6 +91,7 @@ const TitleBox = styled.div`
   margin-top: 20px;
 `;
 
+<<<<<<< HEAD
 const MiddleBox = styled.div`
   display: flex;
   flex-direction: row;
@@ -140,7 +154,13 @@ const ImgView = styled.img`
   width: 400px;
   height: 400px;
   border-radius: 15px;
+=======
+const SaveButton = styled.button`
+  width: 10px;
+  height: 10px;
+>>>>>>> e3f8892335fac15279c3d4d78a27e3b84f1a2254
 `;
+
 
 const BottomBox = styled.div`
   position: sticky;
@@ -163,3 +183,4 @@ const UserBox = styled.div`
   margin-top: 30px;
   margin-bottom: 20px;
 `;
+

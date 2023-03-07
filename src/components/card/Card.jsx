@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import { RiHeart3Line, RiHeart3Fill } from "react-icons/ri";
 import { BsStarFill } from "react-icons/bs";
 
@@ -37,6 +38,7 @@ const Card = ({ item }) => {
       </CardInfoBox>
     </CardBox>
   );
+
 };
 
 export default Card;
@@ -53,8 +55,10 @@ const PriceBox = styled.div`
 `;
 
 const CardBox = styled.div`
+
   width: 250px;
   height: 350px;
+
 `;
 
 const Title = styled.div`
@@ -64,6 +68,7 @@ const Title = styled.div`
   font-size: medium;
   font-weight: bold;
 `;
+
 
 const StarBox = styled.div`
   gap: 5px;
@@ -84,7 +89,6 @@ const ImgBox = styled.div`
   background-color: gray;
   border-radius: 15px;
   cursor: pointer;
-
   .HeartLogo {
     position: absolute;
     top: 10%;
@@ -104,6 +108,8 @@ const ImgBox = styled.div`
 const ImgView = styled.img`
   width: 250px;
   height: 250px;
+`;
+
   border-radius: 15px;
 `;
 
@@ -120,3 +126,32 @@ const CardHeaderBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+
+// ---------------------------------------------------------------
+const StarBox = styled.div`
+  gap: 3px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2px;
+  `;
+  
+  const Star = styled.div`
+  /* width: 20px;
+  height: 20px; */
+  font-size: 20px;
+  /* position: absolute;
+  top: 80%;
+  left: 80%; */
+  color: black;
+`;
+
+const Heart = styled.div`
+  font-size: 25px;
+  position: absolute;
+  top: 0%;
+  left: 80%;
+  color: rgba(231, 231, 231, 0.829);
+`;
+
+
