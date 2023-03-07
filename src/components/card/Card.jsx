@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+
 const Card = ({ item }) => {
   const navigate = useNavigate();
   return (
@@ -30,6 +31,7 @@ const Card = ({ item }) => {
       </CardInfoBox>
     </CardBox>
   );
+
 };
 
 export default Card;

@@ -4,29 +4,50 @@ import Footer from "../components/footer/Footer";
 import Navbar from "./../components/mypage/navbar/Navbar";
 import plus from "../components/util/img/plus.png";
 import { useMutation, useQueryClient } from "react-query";
-import {addRoom} from "../api/api"
-
-
+import { addRoom } from "../api/api";
 
 const MyPageAddRoom = () => {
-  const [imgFile, setImgFile] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [title, setTitle] = useState("");
-  const [detail, setDetail] = useState("");
+  const [explaination, setExplaination] = useState("");
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
   const [maxPeople, setMaxPeople] = useState("");
-  const [bedroom, setBedroom] = useState("");
-  const [bathroom, setBathroom] = useState("");
+  const [houseCase, setHouseCase] = useState("");
+  const [bedRoom, setBedRoom] = useState("");
+  const [bathRoom, setBathRoom] = useState("");
+  const [selectData, setSelectData] = useState([]);
+  const [category, setCategory] = useState();
+  const [facilities, setFacilities] = useState([]);
 
+  //
   const imgRef = useRef();
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImgFile(reader.result);
+      setImgUrl(reader.result);
     };
   };
+
+  const bookingCategories = [
+    "한옥",
+    "양옥",
+    "료칸",
+    "수영장",
+    "캠핑장",
+    "디자인",
+    "서핑",
+    "개인실",
+    "국립공원",
+    "농장",
+  ];
+  const facilityList = ["주방", "무선", "인터넷", "반려동물 입실가능", "세탁기", "헤어드라이어", "에어컨", "난방"];
+  const houseCaseList = ["아파트", "주택", "게스트용 별채", "호텔"];
+  const options = houseCaseList.map((item) => {
+    return <option value={item}>{item}</option>;
+  });
 
   // const formData = new FormData();
   // formData.set("title", newtitle);
@@ -38,7 +59,7 @@ const MyPageAddRoom = () => {
   //   content :formData.get("content");
   // }
   // addEventListener.mutation(payload)
-  
+
   const queryClient = useQueryClient();
   const mutation = useMutation(addRoom, {
     onSuccess: (response) => {
@@ -52,153 +73,144 @@ const MyPageAddRoom = () => {
   });
   const titleHandler = (e) => {
     setTitle(e.target.value);
+    console.log(title);
   };
-  const detailHandler = (e) =>{
-    setDetail(e.target.value)
-  }
+  const detailHandler = (e) => {
+    setExplaination(e.target.value);
+  };
+  const priceHandler = (e) => {
+    setPrice(e.target.value);
+  };
+  const locationHandler = (e) => {
+    setLocation(e.target.value);
+  };
+  const houseHandler = (e) => {
+    setHouseCase(e.target.value);
+    console.log(houseCase);
+  };
+  const maxPeopleHandler = (e) => {
+    setMaxPeople(e.target.value);
+  };
+  const bedRoomHandler = (e) => {
+    setBedRoom(e.target.value);
+  };
+  const radioHandler = (e) => {
+    const { value } = e.target;
+    setCategory(value);
+    console.log(category);
+  };
+
+  const bathRoomHandler = (e) => {
+    setBathRoom(e.target.value);
+  };
+  const facilitiesHandler = (e) => {
+    facilities.push(e.target.value);
+    console.log(facilities);
+  };
   const formHandler = (e) => {
     e.preventDefault();
     const formData = new FormData();
-      
     formData.append("title", title);
-    formData.append("detail", detail);
-    formData.append("imgUrl", imgFile);
-    
-    mutation.mutate(formData)
-    setImgFile("");
+    formData.append("explaination", explaination);
+    formData.append("price", price);
+    formData.append("location", location);
+    formData.append("houseCase", houseCase);
+    formData.append("category", category);
+    formData.append("imgUrl", imgUrl);
+    formData.append(" maxPeople", maxPeople);
+    formData.append(" bedRoom", bedRoom);
+    formData.append(" bathRoom", bathRoom);
+    formData.append("facilities", facilities);
+    mutation.mutate(formData);
+
+    setImgUrl("");
     setTitle("");
-    setDetail("");
+    setExplaination("");
     setPrice("");
     setLocation("");
     setMaxPeople("");
-    setBedroom("");
-    setBathroom("");
+    setBedRoom("");
+    setBathRoom("");
+    setCategory("");
+    setHouseCase("");
   };
   return (
     <div>
       <Navbar />
       <ContentContainer>
         <Card>
-          <Img src={imgFile ? imgFile : plus} alt="이미지 미리보기" />
+          <Img src={imgUrl ? imgUrl : plus} alt="이미지 미리보기" />
           <FileLabel htmlFor="profileImg"></FileLabel>
-          <FileInput
-            type="file"
-            accept="image/*"
-            id="profileImg"
-            onChange={saveImgFile}
-            ref={imgRef}
-          />
+          <FileInput type="file" accept="image/*" id="profileImg" onChange={saveImgFile} ref={imgRef} />
         </Card>
         <form onSubmit={formHandler}>
           <div>
             <label>숙소이름 </label>
-            <input type="text" onChange={titleHandler} value={title} />
+            <input type="text" name="title" onChange={titleHandler} value={title} />
           </div>
           <div>
             <label>숙소설명 </label>
-            <input type="text" onChange={detailHandler} value={detail} />
+            <input type="text" name="explaination" onChange={detailHandler} value={explaination} />
           </div>
           <div>
             <label>숙소가격 </label>
-            <input type="text" />
+            <input type="number" onChange={priceHandler} name="price" value={price} />
           </div>
           <div>
             <label>숙소지역 </label>
-            <input type="text" />
+            <input type="text" onChange={locationHandler} name="location" value={location} />
           </div>
           <div>
             <label>숙소카테고리 </label>
-            <label>
-              <input type="radio" name="category" value="한옥" />
-              한옥
-            </label>
-            <label>
-              <input type="radio" name="category" value="양옥" />
-              양옥
-            </label>
-            <label>
-              <input type="radio" name="category" value="료칸" />
-              료칸
-            </label>
-            <label>
-              <input type="radio" name="category" value="수영장" />
-              수영장
-            </label>
-            <label>
-              <input type="radio" name="category" value="캠핑장" />
-              캠핑장
-            </label>
-            <label>
-              <input type="radio" name="category" value="디자인" />
-              디자인
-            </label>
-            <label>
-              <input type="radio" name="category" value="디자인" />
-              디자인
-            </label>
-            <label>
-              <input type="radio" name="category" value="디자인" />
-              디자인
-            </label>
-            <label>
-              <input type="radio" name="category" value="디자인" />
-              디자인
-            </label>
-            <label>
-              <input type="radio" name="category" value="디자인" />
-              디자인
-            </label>
+            {bookingCategories.map((type) => {
+              return (
+                <label>
+                  <input
+                    type="radio"
+                    checked={category === type}
+                    onChange={radioHandler}
+                    name="category"
+                    value={type}
+                  />
+                  {type}
+                </label>
+              );
+            })}
           </div>
           <div>
             <label>최대인원 </label>
-            <input type="text" />
+            <input type="number" onChange={maxPeopleHandler} name=" maxPeople" value={maxPeople} />
           </div>
           <div>
             <label>거주형태 </label>
-            <input type="text" />
+            <select name="houseCase" onChange={houseHandler} value={houseCase}>
+              {options}
+            </select>
           </div>
           <div>
             <label>침실 수 </label>
-            <input type="text" />
+            <input type="number" onChange={bedRoomHandler} name="bedRoom" value={bedRoom} />
           </div>
           <div>
             <label>화장실 수 </label>
-            <input type="text" />
+            <input type="number" onChange={bathRoomHandler} name="bathRoom" value={bathRoom} />
           </div>
           <div>
             <label>편의시설 </label>
-            <label>
-              <input type="checkbox" name="facility" value="주방" />
-              주방
-            </label>
-            <label>
-              <input type="checkbox" name="facility" value="무선 인터넷" />
-              무선 인터넷
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="facility"
-                value="반려동물 입실 가능"
-              />
-              반려동물 입실 가능
-            </label>
-            <label>
-              <input type="checkbox" name="facility" value="세탁기" />
-              세탁기
-            </label>
-            <label>
-              <input type="checkbox" name="facility" value="헤어드라이어" />
-              헤어드라이어
-            </label>
-            <label>
-              <input type="checkbox" name="facility" value="에어컨" />
-              에어컨
-            </label>
-            <label>
-              <input type="checkbox" name="facility" value="난방" />
-              난방
-            </label>
+            {facilityList.map((item) => {
+              return (
+                <label>
+                  <input
+                    type="checkbox"
+                    onChange={facilitiesHandler}
+                    name={"facilities"}
+                    checked={selectData.check}
+                    value={item}
+                  />
+                  {item}
+                </label>
+              );
+            })}
           </div>
           <button>등록하기</button>
         </form>
