@@ -16,12 +16,10 @@ const Home = () => {
 
   return (
     <>
-
       <TopBox>
         <Header />
         <Index />
       </TopBox>
-
 
       <Wrap>
         {data?.map((item) => {
@@ -32,13 +30,11 @@ const Home = () => {
       <BottomBox>
         <Footer />
       </BottomBox>
-
     </>
   );
 };
 
 export default Home;
-
 
 const TopBox = styled.div`
   position: sticky;
@@ -64,5 +60,4 @@ const BottomBox = styled.div`
   background-color: white;
   border-top: 1px solid #a8a8a86e;
   margin-top: 100px;
-
 `;
