@@ -5,12 +5,12 @@ import Detail from "./../pages/Detail";
 import MyPageAddRoom from "./../pages/MyPageAddRoom";
 import MyPageWishList from "./../pages/MyPageWishList";
 import MyPageReservation from "./../pages/MyPageReservation";
-
+import Main from "./../page/Main";
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Main />} />
         <Route path="/:id" element={<Detail />} />
         <Route path="/mypage" element={<MyPageReservation />} />
         <Route path="/mypage/addroom" element={<MyPageAddRoom />} />
