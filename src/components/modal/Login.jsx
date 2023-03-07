@@ -5,8 +5,19 @@ import { loginUser } from "../../api/api";
 
 const Login = () => {
   const [signUpModal, setSignUpModal] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [inputValue, setInputValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const userInfo = {
+    email: "",
+    password: "",
+  };
+
+  const onSubmitHandler = (e) => {
+    const { email, password } = e.target.value;
+  };
 
   const {
     register,
@@ -16,12 +27,14 @@ const Login = () => {
     isSubmitting,
   } = useForm();
 
+  // <loginUser email={email} password={password} />;
+
   return (
     <div>
       <div>
         <input
-          type="text"
-          value={email}
+          type="email"
+          value={inputValue.email}
           name="id"
           {...register("userId", {
             required: "아이디를 입력해주세요",
@@ -32,7 +45,8 @@ const Login = () => {
             },
           })}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setInputValue({ email: e.target.value });
+            console.log(inputValue);
           }}
           placeholder="이메일을 입력하세요"
         />
@@ -42,10 +56,11 @@ const Login = () => {
       <div>
         <input
           type="password"
-          value={password}
+          value={inputValue.password}
           name="password"
           onChange={(e) => {
-            setPassword(e.target.value);
+            setInputValue({ password: e.target.value });
+            console.log(inputValue);
           }}
           placeholder="비밀번호를 입력하세요"
         />

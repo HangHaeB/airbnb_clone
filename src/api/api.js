@@ -3,8 +3,12 @@ import instance from "./instance";
 
 
 //////////////로 그 인 ///////
-const loginUser = async (userId) => {
-  return await instance.post(`/api/user/login`, userId);
+const loginUser = async (props) => {
+  const login = {
+  }
+
+  return await instance.post(`/api/user/login`, login);
+
 };
 
 const signUpUser = async (newbie) => {
