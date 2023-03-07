@@ -24,7 +24,7 @@ const Card = ({ item }) => {
             navigate(`/${item.id}`);
           }}
         >
-          {item.title}
+          {item.location}
         </Title>
         <StarBox>
           <BsStarFill className="StarLogo" />
