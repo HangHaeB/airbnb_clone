@@ -22,3 +22,21 @@ const addRoom = async (newForm) => {
 };
 
 export { addRoom,getRoom,loginUser,signUpUser }
+
+
+// ---------------곽세령이 짠 거------------------
+const getCard = async () => {
+  const response = await instance.get("/api/houses");
+  return response.data;
+};
+
+export {getCard}
+
+const getDetail = async (houseid) => {
+  const response = await instance.get(`/api/houses/${houseid}`);
+  return response.data;
+};
+
+export {getDetail}
+
+// ---------------곽세령이 짠 거 ------------------
