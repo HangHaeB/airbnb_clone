@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./../components/header/Header";
 import Footer from "./../components/footer/Footer";
+
 import { useQuery } from "react-query";
 import { getDetail } from "../api/api";
 import styled from "styled-components";
@@ -16,10 +17,12 @@ const Detail = (item) => {
   });
   // getDetail을 사용, postID와 id가 같은 data를 가져온다.
 
+
   console.log(data);
 
   return (
     <>
+
       <TopBox>
         <Header />
       </TopBox>
@@ -29,6 +32,7 @@ const Detail = (item) => {
       <BottomBox>
         <Footer />
       </BottomBox>
+
     </>
   );
 };
@@ -38,10 +42,12 @@ export default Detail;
 const TitleBox = styled.div`
   color: black;
 `;
+
 const SaveButton = styled.button`
   width: 10px;
   height: 10px;
 `;
+
 
 const BottomBox = styled.div`
   position: sticky;
@@ -58,3 +64,4 @@ const TopBox = styled.div`
   background-color: white;
   border-bottom: 1px solid #a8a8a86e;
 `;
+

@@ -6,6 +6,7 @@ import { GiLighthouse } from "react-icons/gi";
 import styled from "styled-components";
 
 const Index = () => {
+
   return (
     <CategoryBox>
       <Case1>
@@ -22,6 +23,7 @@ const Index = () => {
       </Case3>
     </CategoryBox>
   );
+
 };
 
 export default Index;

@@ -1,30 +1,28 @@
 import instance from "./instance";
-
-
+import axios from "axios";
 
 //////////////로 그 인 ///////
 const loginUser = async (userId) => {
-  return await instance.post(`/api/user/login`, userId);
+  return await instance.post(`/api/users/login`, userId);
 };
 
 const signUpUser = async (newbie) => {
-  return await instance.post(`/api/users/signup`, newbie)
-}
-
+  return await instance.post(`/api/users/signup`, newbie);
+};
 ///////////////////
 
 const getRoom = async (newForm) => {
-  await instance.get(`/date/`);
+  await instance.get(`/date`);
 };
 
-const addRoom = async (newForm) => {
-  await instance.post(`/date/`, newForm);
+const addRoom = async (formData) => {
+  await instance.post(`/api/houses`, formData);
 };
 
-export { addRoom,getRoom,loginUser,signUpUser }
-
+export { addRoom, getRoom, loginUser, signUpUser };
 
 // ---------------곽세령이 짠 거------------------
+
 const getCard = async () => {
   const response = await instance.get("/api/houses");
   return response.data;
@@ -40,3 +38,5 @@ const getDetail = async (houseid) => {
 export {getDetail}
 
 // ---------------곽세령이 짠 거 ------------------
+
+
