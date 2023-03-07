@@ -8,6 +8,7 @@ import { setCookie } from "../../api/cookies";
 
 const Login = () => {
   const [signUpModal, setSignUpModal] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [loginModal, setLoginModal] = useState(true);
@@ -44,12 +45,14 @@ const Login = () => {
     isSubmitting,
   } = useForm();
 
+  // <loginUser email={email} password={password} />;
+
   return (
     <div>
       <form onSubmit={handleSubmitButtonClick}>
         <input
-          type="text"
-          value={email}
+          type="email"
+          value={inputValue.email}
           name="id"
           {...register("userId", {
             required: "아이디를 입력해주세요",
@@ -59,16 +62,18 @@ const Login = () => {
             },
           })}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setInputValue({ email: e.target.value });
+            console.log(inputValue);
           }}
           placeholder="이메일을 입력하세요"
         />
         <input
           type="password"
-          value={password}
+          value={inputValue.password}
           name="password"
           onChange={(e) => {
-            setPassword(e.target.value);
+            setInputValue({ password: e.target.value });
+            console.log(inputValue);
           }}
           placeholder="비밀번호를 입력하세요"
         />

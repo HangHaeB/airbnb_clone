@@ -2,6 +2,7 @@ import instance from "./instance";
 import axios from "axios";
 
 //////////////로 그 인 ///////
+
 const loginUser = async (userId) => {
   return await instance.post(`/api/users/login`, userId);
 };
