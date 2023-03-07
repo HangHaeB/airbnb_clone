@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { signUpUser } from "../../api/api";
+import { useMutation, useQueryClient } from "react-query";
 
 const SignUp = () => {
   const [email, setEmail] = useState();
@@ -7,8 +8,33 @@ const SignUp = () => {
   const [password, setPassword] = useState();
   const [birth, setBirth] = useState();
 
+  const queryClient = useQueryClient();
+  const mutation = useMutation(signUpUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("user");
+    },
+    onError: (response) => {
+      alert(response.response.data.msg);
+      setEmail("");
+      setUsername("");
+      setPassword("");
+      setBirth("");
+    },
+  });
+
+  const handleSubmitButtonClick = async (event) => {
+    event.preventDefault();
+    const newUser = {
+      username: username,
+      email: email,
+      password: password,
+      birth: birth,
+    };
+    mutation.mutate(newUser);
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmitButtonClick}>
       <input
         value={email}
         type={"text"}
@@ -41,7 +67,7 @@ const SignUp = () => {
 
       <input
         value={birth}
-        type={"text"}
+        type="text"
         onChange={(e) => {
           setBirth(e.target.value);
         }}
@@ -49,7 +75,7 @@ const SignUp = () => {
       />
       <br />
       <button onClick={signUpUser}>확인</button>
-    </div>
+    </form>
   );
 };
 
