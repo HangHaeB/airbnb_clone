@@ -46,13 +46,12 @@ const Detailpage = (item) => {
 
       <DetailBoxBottom>
         <UserinfoBox>
-          <UserBox>{data?.userNickname}님이 호스팅하는 숙소</UserBox>
+          <UserBox>{data?.userName}님이 호스팅하는 숙소</UserBox>
           <UsersmallInfoBox>
-            최대 인원 {data?.maxPeople}명 · 침실 {data?.bedRoom}개 · 욕실{" "}
-            {data?.bathRoom}개
+            최대 인원 {data?.maxPeople}명 · 침실 {data?.bedRoom}개 · 침대{" "}
+            {data?.bedNum}개 · 욕실 {data?.bathRoom}개
           </UsersmallInfoBox>
         </UserinfoBox>
-
         <CheckinbigBox>
           <CheckinBox>
             <TbKey className="TbKey" />
@@ -65,7 +64,7 @@ const Detailpage = (item) => {
           <CheckinBox>
             <RiSuitcaseLine className="RiSuitcaseLine" />
             <HCBox>
-              <HCTitle>{data?.userNickname}님은 슈퍼호스트입니다</HCTitle>
+              <HCTitle>{data?.userName}님은 슈퍼호스트입니다</HCTitle>
               <HCText>슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며</HCText>
               <HCText>
                 게스트가 숙소에서 편안히 머무를 수 있도록 최선을 다하는
@@ -84,7 +83,6 @@ const Detailpage = (item) => {
             </HCBox>
           </CheckinBox>
         </CheckinbigBox>
-
         <AirCoverBox>
           <Aircovertitle>
             <Aircoverred>에어</Aircoverred>
@@ -96,6 +94,12 @@ const Detailpage = (item) => {
             포함됩니다.
           </Aircoverinfo>
         </AirCoverBox>
+        <DescriptionBox>{data?.explaination}</DescriptionBox>
+        <FacilBox>
+          <FacilTitle>숙소 편의시설</FacilTitle>
+          <Facilities></Facilities>
+        </FacilBox>
+        {/* console.log( {data.facilities[0]} ) */}
       </DetailBoxBottom>
     </>
   );
@@ -103,11 +107,30 @@ const Detailpage = (item) => {
 
 export default Detailpage;
 
+const FacilBox = styled.div`
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+const FacilTitle = styled.div`
+  color: black;
+
+  font-size: 150%;
+  font-weight: bolder;
+`;
+const Facilities = styled.div``;
+
+const DescriptionBox = styled.div`
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #a8a8a86e;
+`;
+
 const AirCoverBox = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 30px;
   width: 640px;
+  border-bottom: 1px solid #a8a8a86e;
 `;
 const Aircovertitle = styled.div`
   display: flex;
@@ -125,6 +148,7 @@ const Aircoverblack = styled.div`
 `;
 const Aircoverinfo = styled.div`
   color: black;
+  margin-bottom: 30px;
 `;
 
 const DetailBoxBottom = styled.div`

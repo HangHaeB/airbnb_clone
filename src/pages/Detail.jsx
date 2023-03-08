@@ -31,10 +31,10 @@ const TopBox = styled.div`
 `;
 
 const BottomBox = styled.div`
-  position: sticky;
+  /* position: sticky;
   bottom: 0%;
   z-index: 1;
   background-color: white;
   border-top: 1px solid #a8a8a86e;
-  margin-top: 100px;
+  margin-top: 100px; */
 `;
