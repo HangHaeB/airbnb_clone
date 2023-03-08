@@ -7,10 +7,20 @@ import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/system";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const Login = () => {
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#f1096a",
+        darker: "#940060",
+      },
+    },
+  });
 
   const queryClient = useQueryClient();
   const mutation = useMutation(loginUser, {
@@ -39,49 +49,56 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleSubmitButtonClick}>
-        <Container component="main" maxWidth="xs">
-          <Typography component="h1" variant="h5" sx={{ mt: 4, mb: 3 }}>
-            항해비앤비에 오신 것을 환영합니다.
-          </Typography>
-
-          <TextField
-            label="이메일을 입력해주세요"
-            name="email"
-            value={email}
-            autoComplete="email"
-            margin="normal"
-            autoFocus
-            fullWidth
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            required
-          />
-
-          <TextField
-            label="비밀번호를 입력해주세요"
-            type="password"
-            name="password"
-            value={password}
-            autoComplete="current-password"
-            fullWidth
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            required
-          />
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="error"
-            sx={{ mt: 3 }}
-            onClick={loginUser}
-          >
-            로그인하기
-          </Button>
-        </Container>
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CloseButton
+              onClick={() => {
+                props.setLoginModal(false);
+              }}
+            >
+              X
+            </CloseButton>
+            <LoginTitle>로그인</LoginTitle>
+            <Typography component="h1" variant="h5" sx={{ mt: 4, mb: 3 }}>
+              항해비앤비에 오신 것을 환영합니다.
+            </Typography>
+            <TextField
+              label="이메일을 입력해주세요"
+              name="email"
+              value={email}
+              autoComplete="email"
+              margin="normal"
+              autoFocus
+              fullWidth
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              required
+            />
+            <TextField
+              label="비밀번호를 입력해주세요"
+              type="password"
+              name="password"
+              value={password}
+              autoComplete="current-password"
+              fullWidth
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{ mt: 3 }}
+            >
+              로그인하기
+            </Button>
+          </Container>
+        </ThemeProvider>
       </form>
     </div>
   );
@@ -89,16 +106,26 @@ const Login = () => {
 
 export default Login;
 
-const Logincontainer = styled.div`
-  border: 1px solid black;
+const CloseButton = styled.button`
+  background-color: white;
+  font-size: 20px;
 `;
 
-const Blackbackground = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+const LoginTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: solid 1px black;
 `;
+// const Blackbackground = styled.div`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100vh;
+//   background-color: rgba(0, 0, 0, 0.3);
+//   z-index: 1000;
+// `;

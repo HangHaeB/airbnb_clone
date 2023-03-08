@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
 import Login from "../modal/Login";
@@ -7,7 +7,7 @@ import SignUp from "../modal/SignUp";
 const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
-  const [modal, setModal] = useState(false);
+  const outside = useRef();
 
   return (
     <HeaderContainer>
@@ -39,14 +39,14 @@ const Header = () => {
       {loginModal === true ? (
         // <Blackbackground>
         <Modal>
-          <Login />
+          <Login setLoginModal={setLoginModal} />
         </Modal>
       ) : // </Blackbackground>
       null}
 
       {signUpModal === true ? (
         <Modal>
-          <SignUp />
+          <SignUp setSignUpModal={setSignUpModal} />
         </Modal>
       ) : null}
     </HeaderContainer>
@@ -86,20 +86,25 @@ const Profile = styled.div`
 
 const Modal = styled.div`
   position: absolute;
-  top: 50%;
+  top: 300%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   height: 500px;
+  background-color: white;
 `;
 
 const Blackbackground = styled.div`
   position: fixed;
-  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 100%;
+  justify-content: center;
   left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 300%;
   width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 100;
 `;

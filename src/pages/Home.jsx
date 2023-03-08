@@ -8,30 +8,54 @@ import styled from "styled-components";
 import Card from "../components/card/Card";
 
 const Home = () => {
-  // const { data } = useQuery("card", getCard, {
-  //   onSuccess: (response) => {},
-  // });
+  const { data } = useQuery("card", getCard, {
+    onSuccess: (response) => {},
+  });
 
   return (
     <>
-      <Header />
-      <Index />
+      <TopBox>
+        <Header />
+        <Index />
+      </TopBox>
+
       <Wrap>
-        {/* {data?.map((item, i) => {
+        {data?.map((item, i) => {
           return <Card key={i} item={item} />;
-        })} */}
+        })}
       </Wrap>
-      <Footer />
+
+      <BottomBox>
+        <Footer />
+      </BottomBox>
     </>
   );
 };
 
 export default Home;
 
+const TopBox = styled.div`
+  position: sticky;
+  top: 0%;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid #a8a8a86e;
+`;
+
 const Wrap = styled.div`
-  width: 1000px;
-  margin: 0 auto;
-  height: 300px;
   display: flex;
-  gap: 30px;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 50px;
+  overflow: hidden;
+`;
+
+const BottomBox = styled.div`
+  position: sticky;
+  bottom: 0%;
+  z-index: 1;
+  background-color: white;
+  border-top: 1px solid #a8a8a86e;
+  margin-top: 100px;
 `;
