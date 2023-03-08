@@ -11,8 +11,8 @@ const signUpUser = async (newbie) => {
 };
 ///////////////////
 
-const getRoom = async (newForm) => {
-  await instance.get(`/date`);
+const getRoom = async (dateId) => {
+  await instance.get(`/date/${dateId}`);
 };
 
 const addRoom = async (formData) => {
@@ -20,3 +20,17 @@ const addRoom = async (formData) => {
 };
 
 export { addRoom, getRoom, loginUser, signUpUser };
+
+const getCard = async () => {
+  const response = await instance.get("/api/houses");
+  return response.data;
+};
+
+export { getCard };
+
+const getDetail = async (houseId) => {
+  const response = await instance.get(`/api/houses/${houseId}`);
+  return response.data;
+};
+
+export { getDetail };

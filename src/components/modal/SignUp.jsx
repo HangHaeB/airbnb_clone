@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { signUpUser } from "../../api/api";
 import { useMutation, useQueryClient } from "react-query";
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
   const [email, setEmail] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [birth, setBirth] = useState();
-
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const mutation = useMutation(signUpUser, {
     onSuccess: () => {
       queryClient.invalidateQueries("user");
-    },
-    onError: (response) => {
-      alert(response.response.data.msg);
       setEmail("");
       setUsername("");
       setPassword("");
       setBirth("");
+      navigate("/");
+    },
+    onError: (response) => {
+      alert(response.response.data.msg);
     },
   });
 
@@ -37,7 +39,7 @@ const SignUp = () => {
     <form onSubmit={handleSubmitButtonClick}>
       <input
         value={email}
-        type={"text"}
+        type="text"
         onChange={(e) => {
           setEmail(e.target.value);
         }}
@@ -47,7 +49,7 @@ const SignUp = () => {
 
       <input
         value={username}
-        type={"text"}
+        type="text"
         onChange={(e) => {
           setUsername(e.target.value);
         }}
@@ -57,7 +59,7 @@ const SignUp = () => {
 
       <input
         value={password}
-        type={"password"}
+        type="password"
         onChange={(e) => {
           setPassword(e.target.value);
         }}

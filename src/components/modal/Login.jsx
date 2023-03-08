@@ -6,8 +6,10 @@ import styled from "styled-components";
 import { useQueryClient, useMutation } from "react-query";
 import { setCookie } from "../../api/cookies";
 import moment from "moment";
+
 const Login = () => {
   const [signUpModal, setSignUpModal] = useState(false);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [loginModal, setLoginModal] = useState(true);
@@ -44,11 +46,13 @@ const Login = () => {
     isSubmitting,
   } = useForm();
 
+  // <loginUser email={email} password={password} />;
+
   return (
     <div>
       <form onSubmit={handleSubmitButtonClick}>
         <input
-          type="text"
+          type="email"
           value={email}
           name="id"
           {...register("userId", {

@@ -4,28 +4,27 @@ import styled from "styled-components";
 import Login from "../modal/Login";
 import "./header.css";
 import { getCookie } from "../../api/cookies";
-import App from "./../../App";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [modal, setModal] = useState(false);
   const [showNavUser, setShowNavUser] = useState(false);
   const showNavUserBtn = () => setShowNavUser((showNavUser) => !showNavUser);
   const showLoginModal = () => setLoginModal((loginModal) => !loginModal);
+
+  const navigate = useNavigate();
+  const goToDetail = () => {
+    navigate(`/detail`);
+  };
+  const goToMypage = () => {
+    navigate(`/mypage`);
+  };
   return (
-    // <HeaderContainer>
-    //   <Img src={logo} alt="logo" />
-    //   <InputContainer>
-    //     <SearchInput1 />
-    //     <SearchInput2 type="date" />
-    //     <SearchInput3 type="date" />
-    //   </InputContainer>
-    //
-    //   <Modal>{loginModal === true ? <Login /> : null}</Modal>
-    // </HeaderContainer>
     <HeaderContainer className="header">
-      <div className="header__column">
+      <Link to="/">
         <Img src={logo} alt="logo" />
-      </div>
+      </Link>
       <div className="header__column">
         <form class="search-form">
           <div>
@@ -33,7 +32,7 @@ const Header = () => {
               <li tabindex="-1">숙소</li>
               <li tabindex="-1">체험</li>
               <li tabindex="-1">
-                <a href="#">온라인 체험</a>
+                <div>온라인 체험</div>
               </li>
             </ul>
           </div>
@@ -101,8 +100,8 @@ const Header = () => {
           </div>
         </form>
       </div>
-      <div className="header__column header__column-nav">
-        <nav>
+      <NavBar>
+        <Nav>
           <Profile>
             <div>{localStorage.getItem("name")}님</div>
             {loginModal ? (
@@ -127,15 +126,17 @@ const Header = () => {
               <UserBar>
                 <strong>회원 가입</strong>
               </UserBar>
-              <UserBar>로그인</UserBar>
+
+              <UserBar onClick={() => setModal(!modal)}>로그인</UserBar>
               <Line />
               <UserBar>숙소 호스트 되기</UserBar>
-              <UserBar>체험 호스팅하기</UserBar>
+              <UserBar onClick={goToMypage}>마이페이지</UserBar>
               <UserBar>도움말</UserBar>
             </NavUser>
           )}
-        </nav>
-      </div>
+        </Nav>
+      </NavBar>
+      {modal ? <Login /> : null}
     </HeaderContainer>
   );
 };
@@ -178,6 +179,15 @@ const Modal = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
+const Nav = styled.nav`
+  display: flex;
+  align-items: center;
+`;
+const NavBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-self: baseline;
+`;
 const NavBarBtn = styled.div`
   width: 70px;
   margin: 0 auto;
@@ -198,10 +208,10 @@ const NavUserBtn = styled.div`
   background-color: white;
   border-radius: 22px;
   cursor: pointer;
+  border: 1px solid gray;
 `;
 const NavUser = styled.div`
   border: 1px solid red;
-
   position: absolute;
   top: 90px;
   right: 150px;
