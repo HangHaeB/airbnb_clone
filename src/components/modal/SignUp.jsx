@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { signUpUser } from "../../api/api";
 import { useMutation, useQueryClient } from "react-query";
+import { TextField } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { Container } from "@mui/system";
+import Button from "@mui/material/Button";
 
 const SignUp = () => {
   const [email, setEmail] = useState();
@@ -35,46 +39,69 @@ const SignUp = () => {
 
   return (
     <form onSubmit={handleSubmitButtonClick}>
-      <input
-        value={email}
-        type={"text"}
-        onChange={(e) => {
-          setEmail(e.target.value);
-        }}
-        placeholder="이메일을 적어주세요"
-      />
-      <br />
+      <Container component="main" maxWidth="xs">
+        <Typography component="h1" variant="h5" sx={{ mt: 4, mb: 3 }}>
+          항해비앤비에 오신 것을 환영합니다.
+        </Typography>
+        <TextField
+          label="이메일을 입력해주세요"
+          name="email"
+          value={email || ""}
+          autoComplete="email"
+          autoFocus
+          fullWidth
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          required
+        />
+        <TextField
+          label="닉네임을 적어주세요"
+          name="username"
+          value={username || ""}
+          margin="normal"
+          fullWidth
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+          required
+        />
 
-      <input
-        value={username}
-        type={"text"}
-        onChange={(e) => {
-          setUsername(e.target.value);
-        }}
-        placeholder="닉네임을 적어주세요"
-      />
-      <br />
+        <TextField
+          label="비밀번호를 입력해주세요"
+          type="password"
+          name="password"
+          value={password || ""}
+          autoComplete="current-password"
+          margin="normal"
+          fullWidth
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          required
+        />
 
-      <input
-        value={password}
-        type={"password"}
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-        placeholder="비밀번호를 적어주세요"
-      />
-      <br />
-
-      <input
-        value={birth}
-        type="text"
-        onChange={(e) => {
-          setBirth(e.target.value);
-        }}
-        placeholder="생년월일 0000-00-00"
-      />
-      <br />
-      <button onClick={signUpUser}>확인</button>
+        <TextField
+          label="생년월일 0000-00-00(-는 빼고 입력해주세요)"
+          name="birth"
+          value={birth || ""}
+          margin="normal"
+          fullWidth
+          onChange={(e) => {
+            setBirth(e.target.value);
+          }}
+          required
+        />
+        <Button
+          fullWidth
+          variant="contained"
+          color="error"
+          sx={{ mt: 3 }}
+          onClick={signUpUser}
+        >
+          회원가입하기
+        </Button>
+      </Container>
     </form>
   );
 };

@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { GlobalStyle } from "./Globalstyle";
+import { GlobalStyle } from "./GlobalStyle.js";
 
 import Router from "./router/Router";
 

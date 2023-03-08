@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-
 const Card = ({ item }) => {
   const navigate = useNavigate();
+
   return (
     <CardBox>
       <ImgBox>
@@ -31,7 +31,6 @@ const Card = ({ item }) => {
       </CardInfoBox>
     </CardBox>
   );
-
 };
 
 export default Card;
@@ -64,7 +63,6 @@ const Title = styled.div`
 const ImgBox = styled.div`
   width: 300px;
   height: 300px;
-
   position: relative;
   background-color: gray;
   border-radius: 15px;

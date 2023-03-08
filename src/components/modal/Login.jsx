@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import SignUp from "./SignUp";
 import { loginUser, getUsers } from "../../api/api";
 import styled from "styled-components";
 import { useQueryClient, useMutation } from "react-query";
 import { setCookie } from "../../api/cookies";
+import { TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Container } from "@mui/system";
 
 const Login = () => {
-  const [signUpModal, setSignUpModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [loginModal, setLoginModal] = useState(true);
 
   const queryClient = useQueryClient();
   const mutation = useMutation(loginUser, {
@@ -36,68 +36,68 @@ const Login = () => {
     mutation.mutate(loginUser);
   };
 
-  const {
-    register,
-    setValue,
-    formState: { errors },
-    handleSubmit,
-    isSubmitting,
-  } = useForm();
-
-  // <loginUser email={email} password={password} />;
-
   return (
     <div>
       <form onSubmit={handleSubmitButtonClick}>
-        <input
-          type="email"
-          value={inputValue.email}
-          name="id"
-          {...register("userId", {
-            required: "아이디를 입력해주세요",
-            pattern: {
-              value: /^[a-z]+[a-z0-9]{2,19}$/g,
-              message:
-                "아이디는 2-19자 사이의 영문자 소문자와 숫자만 입력하세요",
-            },
-          })}
-          onChange={(e) => {
-            setInputValue({ email: e.target.value });
-            console.log(inputValue);
-          }}
-          placeholder="이메일을 입력하세요"
-        />
-        <input
-          type="password"
-          value={inputValue.password}
-          name="password"
-          onChange={(e) => {
-            setInputValue({ password: e.target.value });
-            console.log(inputValue);
-          }}
-          placeholder="비밀번호를 입력하세요"
-        />
-        <button onClick={loginUser}>확인</button>
-        <button
-          onClick={() => {
-            setSignUpModal(!signUpModal);
-            // setLoginModal(!loginModal);
-          }}
-        >
-          회원가입 하기
-        </button>
-      </form>
+        <Container component="main" maxWidth="xs">
+          <Typography component="h1" variant="h5" sx={{ mt: 4, mb: 3 }}>
+            항해비앤비에 오신 것을 환영합니다.
+          </Typography>
 
-      <Modal>{signUpModal === true ? <SignUp /> : null}</Modal>
+          <TextField
+            label="이메일을 입력해주세요"
+            name="email"
+            value={email}
+            autoComplete="email"
+            margin="normal"
+            autoFocus
+            fullWidth
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
+          />
+
+          <TextField
+            label="비밀번호를 입력해주세요"
+            type="password"
+            name="password"
+            value={password}
+            autoComplete="current-password"
+            fullWidth
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            required
+          />
+
+          <Button
+            fullWidth
+            variant="contained"
+            color="error"
+            sx={{ mt: 3 }}
+            onClick={loginUser}
+          >
+            로그인하기
+          </Button>
+        </Container>
+      </form>
     </div>
   );
 };
 
 export default Login;
 
-const Modal = styled.div`
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
+const Logincontainer = styled.div`
+  border: 1px solid black;
+`;
+
+const Blackbackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 `;

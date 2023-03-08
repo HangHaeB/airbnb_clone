@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
 import Login from "../modal/Login";
+import SignUp from "../modal/SignUp";
 
 const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
   const [modal, setModal] = useState(false);
 
   return (
@@ -25,8 +27,28 @@ const Header = () => {
         >
           로그인
         </button>
+        <button
+          onClick={() => {
+            setSignUpModal(!signUpModal);
+          }}
+        >
+          회원가입
+        </button>
       </Profile>
-      <Modal>{loginModal === true ? <Login /> : null}</Modal>
+
+      {loginModal === true ? (
+        // <Blackbackground>
+        <Modal>
+          <Login />
+        </Modal>
+      ) : // </Blackbackground>
+      null}
+
+      {signUpModal === true ? (
+        <Modal>
+          <SignUp />
+        </Modal>
+      ) : null}
     </HeaderContainer>
   );
 };
@@ -67,4 +89,17 @@ const Modal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  height: 500px;
+`;
+
+const Blackbackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 `;

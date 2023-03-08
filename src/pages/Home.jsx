@@ -8,20 +8,18 @@ import styled from "styled-components";
 import Card from "../components/card/Card";
 
 const Home = () => {
-  const { data } = useQuery("card", getCard, {
-    onSuccess: (response) => {},
-  });
-
-  console.log(data);
+  // const { data } = useQuery("card", getCard, {
+  //   onSuccess: (response) => {},
+  // });
 
   return (
     <>
       <Header />
       <Index />
       <Wrap>
-        {data?.map((item) => {
-          return <Card item={item} />;
-        })}
+        {/* {data?.map((item, i) => {
+          return <Card key={i} item={item} />;
+        })} */}
       </Wrap>
       <Footer />
     </>
