@@ -2,31 +2,140 @@ import React, { useState } from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
 import Login from "../modal/Login";
-
+import "./header.css";
+import { getCookie } from "../../api/cookies";
+import App from "./../../App";
 const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [modal, setModal] = useState(false);
-
+  const [showNavUser, setShowNavUser] = useState(false);
+  const showNavUserBtn = () => setShowNavUser((showNavUser) => !showNavUser);
+  const showLoginModal = () => setLoginModal((loginModal) => !loginModal);
   return (
-    <HeaderContainer>
-      <Img src={logo} alt="logo" />
-      <InputContainer>
-        <SearchInput1 />
-        <SearchInput2 type="date" />
-        <SearchInput3 type="date" />
-      </InputContainer>
-      <Profile>
-        <div>당신의 공간을 에어비앤비하세요</div>
-        <div>{localStorage.getItem("name")}님</div>
-        <button
-          onClick={() => {
-            setLoginModal(!loginModal);
-          }}
-        >
-          로그인
-        </button>
-      </Profile>
-      <Modal>{loginModal === true ? <Login /> : null}</Modal>
+    // <HeaderContainer>
+    //   <Img src={logo} alt="logo" />
+    //   <InputContainer>
+    //     <SearchInput1 />
+    //     <SearchInput2 type="date" />
+    //     <SearchInput3 type="date" />
+    //   </InputContainer>
+    //
+    //   <Modal>{loginModal === true ? <Login /> : null}</Modal>
+    // </HeaderContainer>
+    <HeaderContainer className="header">
+      <div className="header__column">
+        <Img src={logo} alt="logo" />
+      </div>
+      <div className="header__column">
+        <form class="search-form">
+          <div>
+            <ul class="search-form__tab">
+              <li tabindex="-1">숙소</li>
+              <li tabindex="-1">체험</li>
+              <li tabindex="-1">
+                <a href="#">온라인 체험</a>
+              </li>
+            </ul>
+          </div>
+          <div class="search-form__query form__stay">
+            <div class="query__column query__location">
+              <div class="query__column-title">위치</div>
+              <div>
+                <input
+                  type="text"
+                  name="search-query-location"
+                  id="search-query-location"
+                  placeholder="어디로 여행가십니까"
+                />
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="query-date-wrapper">
+              <div class="query__column query__date">
+                <div class="query__column-title">체크인</div>
+                <div class="query-date__content">날짜 추가</div>
+              </div>
+              <div class="divider"></div>
+              <div class="query__column query__date">
+                <div class="query__column-title">체크아웃</div>
+                <div class="query-date__content">날짜 추가</div>
+              </div>
+              <div class="calendar stay-calendar hidden"></div>
+            </div>
+            <div class="divider"></div>
+            <div class="query__column-submit">
+              <div class="query__column query__guest">
+                <div class="query__column-title">인원</div>
+                <div>게스트 추가</div>
+              </div>
+              <div>
+                <button type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="search-form__query form__experience hidden">
+            <div class="query__column query__location">
+              <div class="query__column-title">위치</div>
+              <input
+                type="text"
+                name="search-query-location"
+                id="search-query-location"
+                placeholder="어디로 여행가십니까"
+              />
+            </div>
+            <div class="divider"></div>
+            <div class="query__column-submit">
+              <div class="query__column query__date">
+                <div class="query__column-title">날짜</div>
+                <div class="query-date__content">원하는 날짜를 입력하세요</div>
+              </div>
+              <div class="calendar experience-calendar hidden"></div>
+              <div>
+                <button type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className="header__column header__column-nav">
+        <nav>
+          <Profile>
+            <div>{localStorage.getItem("name")}님</div>
+            {loginModal ? (
+              <NavBarBtn onClick={showLoginModal}>로그아웃</NavBarBtn>
+            ) : (
+              <NavBarBtn onClick={showLoginModal}>로그인</NavBarBtn>
+            )}
+          </Profile>
+          <NavBarBtn>
+            <i className="fas fa-globe"></i>
+          </NavBarBtn>
+          <NavUserBtn onClick={showNavUserBtn}>
+            <div>
+              <div className="fas fa-bars"></div>
+            </div>
+            <div>
+              <div className="fas fa-user"></div>
+            </div>
+          </NavUserBtn>
+          {showNavUser && (
+            <NavUser>
+              <UserBar>
+                <strong>회원 가입</strong>
+              </UserBar>
+              <UserBar>로그인</UserBar>
+              <Line />
+              <UserBar>숙소 호스트 되기</UserBar>
+              <UserBar>체험 호스팅하기</UserBar>
+              <UserBar>도움말</UserBar>
+            </NavUser>
+          )}
+        </nav>
+      </div>
     </HeaderContainer>
   );
 };
@@ -37,9 +146,10 @@ const HeaderContainer = styled.div`
   width: 90vw;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 20px 150px;
   height: 40px;
-  margin: 0 auto;
+  margin: 20px auto;
+  align-items: center;
 `;
 const InputContainer = styled.div`
   display: flex;
@@ -67,4 +177,55 @@ const Modal = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+const NavBarBtn = styled.div`
+  width: 70px;
+  margin: 0 auto;
+  cursor: pointer;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+`;
+const NavUserBtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80px;
+  height: 45px;
+  font-size: 1.1rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: white;
+  border-radius: 22px;
+  cursor: pointer;
+`;
+const NavUser = styled.div`
+  border: 1px solid red;
+
+  position: absolute;
+  top: 90px;
+  right: 150px;
+  z-index: 100;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  width: 230px;
+  height: 230px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  /* margin-top: 10px; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+const Line = styled.div`
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+`;
+const UserBar = styled.div`
+  width: 100%;
+  padding: 10px 20px 10px 20px;
 `;

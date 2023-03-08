@@ -1,8 +1,9 @@
 import axios from "axios";
-import { getCookie } from "./cookies";
-
+import { getCookie, removeCookie } from "./cookies";
+import moment from "moment";
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}`,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,20 +12,20 @@ const instance = axios.create({
 instance.interceptors.request.use(
   //요청을 보내기 전 수행
   function (config) {
-    // // 토큰을 요청이 시작될 때 가져옴
-    const accessToken = getCookie("ACCESS_TOKEN");
-    // // 요청 config headers에 토큰을 넣어 줌
-    config.headers["Authorization"] = accessToken;
-    // // config.headers["RT_Authorization"] = accessToken;
-    return config;
+    // const accessToken = getCookie("ACCESS_TOKEN");
+    const refreshToken = getCookie("RT_TOKEN");
+    const expireAt = localStorage.getItem("expiresAt");
 
-    // return config;
+    if (moment(expireAt).diff(moment()) < 0 && refreshToken) {
+      const refreshToken = getCookie("RT_TOKEN");
+    }
+    config.headers["Authorization"] = refreshToken;
+    return config;
   },
 
   // 오류 요청을 보내기 전 수행
   function (error) {
-    console.log("데이터 보내는중 오류!");
-    return Promise.reject(error);
+    removeCookie("ACCESS_TOKEN");
   },
 );
 
@@ -41,6 +42,7 @@ instance.interceptors.response.use(
     if (error.response.statusCode === 400) {
       alert("데이터 수신중에 오류가 났어요!!!");
     }
+    //// else( statusCode 보내달라고 하기 )
     return Promise.reject(error);
   },
 );
