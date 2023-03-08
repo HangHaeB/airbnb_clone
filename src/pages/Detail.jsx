@@ -10,8 +10,9 @@ const Detail = () => {
       <TopBox>
         <Header />
       </TopBox>
-
-      <Detailpage />
+      <DetailWholeBox>
+        <Detailpage />
+      </DetailWholeBox>
 
       <Footer />
     </>
@@ -21,9 +22,15 @@ const Detail = () => {
 export default Detail;
 
 const TopBox = styled.div`
+  width: 1200px;
   position: sticky;
   top: 0%;
   z-index: 1;
   background-color: white;
   border-bottom: 1px solid #a8a8a86e;
+`;
+
+const DetailWholeBox = styled.div`
+  width: 1200px;
+  margin: 0 auto;
 `;
