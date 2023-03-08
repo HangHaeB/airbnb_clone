@@ -22,6 +22,7 @@ const addRoom = async (formData) => {
 export { addRoom, getRoom, loginUser, signUpUser };
 
 // ---------------곽세령이 짠 거------------------
+
 const getCard = async () => {
   const response = await instance.get("/api/houses");
   return response.data;
@@ -36,7 +37,19 @@ const getDetail = async (houseid) => {
 
 export {getDetail}
 
-// ---------------곽세령이 짠 거 ------------------
+const getReview = async (houseid) => {
+  return await instance.get(`/api/houses/${houseid}/reviews`);
+};
 
+export{getReview}
+
+const addReview = async (houseid) => {
+  return await instance.post(`/api/houses/${houseid}/reviews`, houseid);
+};
+
+export {addReview}
+
+
+// ---------------곽세령이 짠 거 ------------------
 
 
