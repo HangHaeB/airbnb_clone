@@ -37,12 +37,10 @@ const Header = () => {
       </Profile>
 
       {loginModal === true ? (
-        // <Blackbackground>
         <Modal>
           <Login setLoginModal={setLoginModal} />
         </Modal>
-      ) : // </Blackbackground>
-      null}
+      ) : null}
 
       {signUpModal === true ? (
         <Modal>
@@ -93,18 +91,4 @@ const Modal = styled.div`
   border-radius: 10px;
   height: 500px;
   background-color: white;
-`;
-
-const Blackbackground = styled.div`
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  left: 0;
-  overflow: hidden;
-  position: absolute;
-  top: 300%;
-  width: 100%;
-  z-index: 100;
 `;

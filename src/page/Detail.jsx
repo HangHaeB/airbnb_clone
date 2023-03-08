@@ -1,11 +1,10 @@
 import React from "react";
-
 import { useParams } from "react-router";
 import { useQuery } from "react-query";
 import { getDetail } from "../api/api";
 import styled from "styled-components";
 import { RiHeart3Line, RiSuitcaseLine } from "react-icons/ri";
-import { BsStarFill } from "react-icons/bs";
+import { BsStarFill, BsPersonCircle } from "react-icons/bs";
 import { TbLocation, TbKey } from "react-icons/tb";
 
 const Detailpage = (item) => {
@@ -18,7 +17,7 @@ const Detailpage = (item) => {
   });
   // getDetail을 사용, postID와 id가 같은 data를 가져온다.
 
-  // console.log(data);
+  console.log(data);
 
   return (
     <>
@@ -127,15 +126,61 @@ const Detailpage = (item) => {
           <HHBNBtext>HangHaeBnB</HHBNBtext>
         </ResCard>
       </RescardAndDetail>
+
+      <CommentBox>
+        <FacilTitle>댓글</FacilTitle>
+        <CommentTop>
+          <ProfileBox>
+            <CommentU>{data?.reviews[0]?.userName}</CommentU>
+            <CommentC>{data?.reviews[0]?.createdAt}</CommentC>
+          </ProfileBox>
+        </CommentTop>
+        <CommentR>{data?.reviews[0]?.review}</CommentR>
+
+        <CommentTop>
+          <ProfileBox>
+            <CommentU>{data?.reviews[1]?.userName}</CommentU>
+            <CommentC>{data?.reviews[1]?.createdAt}</CommentC>
+          </ProfileBox>
+        </CommentTop>
+        <CommentR>{data?.reviews[1]?.review}</CommentR>
+      </CommentBox>
     </>
   );
 };
 
 export default Detailpage;
 
+const CommentTop = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+`;
+
+const ProfileBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+`;
+
+const CommentU = styled.div`
+  font-weight: bolder;
+`;
+const CommentC = styled.div``;
+const CommentR = styled.div`
+  margin-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #a8a8a86e;
+`;
+const CommentBox = styled.div`
+  border-top: 1px solid #2b2b2b6c;
+  margin: 30px;
+`;
+
 const HHBNBtext = styled.div`
-  margin-top: 30px;
-  border-top: 1px solid gray;
+  margin-top: 20px;
+  padding-top: 25px;
+  border-top: 1px solid black;
 `;
 
 const Restext = styled.div`
@@ -145,13 +190,12 @@ const Restext = styled.div`
 const StButton = styled.button`
   border-radius: 7px;
   background-color: #ff006a;
-  width: 150px;
-  height: 35px;
+  width: 190px;
+  height: 45px;
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
   color: white;
-  margin-left: 8px;
   margin-top: 30px;
   margin-bottom: 30px;
 `;
@@ -163,8 +207,8 @@ const PriceTag = styled.div`
 `;
 
 const ResCard = styled.div`
-  width: 170px;
-  height: 320px;
+  width: 190px;
+  height: 330px;
   background-color: #ffffff;
   border-radius: 20px;
   position: sticky;
@@ -180,8 +224,7 @@ const RescardAndDetail = styled.div`
 `;
 
 const FacilityBox = styled.div`
-  padding-bottom: 40px;
-  border-bottom: 1px solid #a8a8a86e;
+  padding-bottom: 20px;
 `;
 
 const FacilBox = styled.div`
@@ -311,6 +354,7 @@ const MiddleBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 900px;
 `;
 
 const StarBox = styled.div`
