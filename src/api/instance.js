@@ -38,11 +38,11 @@ instance.interceptors.response.use(
   },
 
   function (error) {
-    console.log(error)
+    
     // if (error.response.statusCode === 400) {
     //   alert("데이터 수신중에 오류가 났어요!!!");
     // }
-    // return Promise.reject(error);
+    return Promise.reject(error);
   },
 );
 export default instance;

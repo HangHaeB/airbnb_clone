@@ -7,10 +7,10 @@ import { Container } from "@mui/system";
 import Button from "@mui/material/Button";
 
 const SignUp = () => {
-  const [email, setEmail] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
-  const [birth, setBirth] = useState();
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [birth, setBirth] = useState("");
 
   const queryClient = useQueryClient();
   const mutation = useMutation(signUpUser, {
@@ -34,6 +34,7 @@ const SignUp = () => {
       password: password,
       birth: birth,
     };
+    console.log(newUser);
     mutation.mutate(newUser);
   };
 
@@ -46,7 +47,7 @@ const SignUp = () => {
         <TextField
           label="이메일을 입력해주세요"
           name="email"
-          value={email || ""}
+          value={email}
           autoComplete="email"
           autoFocus
           fullWidth
@@ -58,7 +59,7 @@ const SignUp = () => {
         <TextField
           label="닉네임을 적어주세요"
           name="username"
-          value={username || ""}
+          value={username}
           margin="normal"
           fullWidth
           onChange={(e) => {
@@ -71,7 +72,7 @@ const SignUp = () => {
           label="비밀번호를 입력해주세요"
           type="password"
           name="password"
-          value={password || ""}
+          value={password}
           autoComplete="current-password"
           margin="normal"
           fullWidth
@@ -84,7 +85,7 @@ const SignUp = () => {
         <TextField
           label="생년월일 0000-00-00(-는 빼고 입력해주세요)"
           name="birth"
-          value={birth || ""}
+          value={birth}
           margin="normal"
           fullWidth
           onChange={(e) => {
@@ -93,11 +94,11 @@ const SignUp = () => {
           required
         />
         <Button
+          type="submit"
           fullWidth
           variant="contained"
           color="error"
           sx={{ mt: 3 }}
-          onClick={signUpUser}
         >
           회원가입하기
         </Button>
