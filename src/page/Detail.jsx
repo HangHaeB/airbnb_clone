@@ -6,11 +6,11 @@ import { getDetail } from "../api/api";
 import styled from "styled-components";
 import { RiHeart3Line, RiSuitcaseLine } from "react-icons/ri";
 import { BsStarFill } from "react-icons/bs";
-import { TbMedal, TbLocation, TbKey } from "react-icons/tb";
+import { TbLocation, TbKey } from "react-icons/tb";
 
 const Detailpage = (item) => {
   const postID = useParams();
-  console.log(postID);
+  // console.log(postID);
   // useParams를 사용해 URL 맨 뒤에 붙을 숫자를 postID라고 이름붙이고 가져온다
 
   const { data } = useQuery("Detail", () => {
@@ -18,7 +18,8 @@ const Detailpage = (item) => {
   });
   // getDetail을 사용, postID와 id가 같은 data를 가져온다.
 
-  console.log(data);
+  // console.log(data);
+
   return (
     <>
       <DetailBoxTop>
@@ -95,11 +96,19 @@ const Detailpage = (item) => {
           </Aircoverinfo>
         </AirCoverBox>
         <DescriptionBox>{data?.explaination}</DescriptionBox>
-        <FacilBox>
-          <FacilTitle>숙소 편의시설</FacilTitle>
-          <Facilities></Facilities>
-        </FacilBox>
-        {/* console.log( {data.facilities[0]} ) */}
+
+        <FacilityBox>
+          <FacilTitle>숙소 편의시설 🏠</FacilTitle>
+          <FacilBox>
+            <Facilities>{data?.facilities[0]?.type}</Facilities>
+            <Facilities>{data?.facilities[1]?.type}</Facilities>
+            <Facilities>{data?.facilities[2]?.type}</Facilities>
+            <Facilities>{data?.facilities[3]?.type}</Facilities>
+            <Facilities>{data?.facilities[4]?.type}</Facilities>
+            <Facilities>{data?.facilities[5]?.type}</Facilities>
+            <Facilities>{data?.facilities[6]?.type}</Facilities>
+          </FacilBox>
+        </FacilityBox>
       </DetailBoxBottom>
     </>
   );
@@ -107,17 +116,29 @@ const Detailpage = (item) => {
 
 export default Detailpage;
 
-const FacilBox = styled.div`
-  margin-top: 30px;
-  margin-bottom: 30px;
+const FacilityBox = styled.div`
+  padding-bottom: 40px;
+  border-bottom: 1px solid #a8a8a86e;
 `;
+
+const FacilBox = styled.div`
+  padding-bottom: 30px;
+  border: 1px solid black;
+  width: 200px;
+  border-radius: 20px;
+  padding: 20px;
+`;
+
 const FacilTitle = styled.div`
   color: black;
-
+  margin-top: 30px;
+  margin-bottom: 20px;
   font-size: 150%;
   font-weight: bolder;
 `;
-const Facilities = styled.div``;
+const Facilities = styled.div`
+  font-size: 120%;
+`;
 
 const DescriptionBox = styled.div`
   padding-top: 30px;

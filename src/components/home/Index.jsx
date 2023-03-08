@@ -11,7 +11,6 @@ import {
   MdOutlineCastle,
   MdOutlineHotel,
   MdOutlineHouse,
-  MdOutlineHouseboat,
 } from "react-icons/md";
 import { BiSwim } from "react-icons/bi";
 import { HiOutlineSparkles } from "react-icons/hi";
