@@ -13,9 +13,7 @@ const Detail = () => {
 
       <Detailpage />
 
-      <BottomBox>
-        <Footer />
-      </BottomBox>
+      <Footer />
     </>
   );
 };
@@ -28,13 +26,4 @@ const TopBox = styled.div`
   z-index: 1;
   background-color: white;
   border-bottom: 1px solid #a8a8a86e;
-`;
-
-const BottomBox = styled.div`
-  /* position: sticky;
-  bottom: 0%;
-  z-index: 1;
-  background-color: white;
-  border-top: 1px solid #a8a8a86e;
-  margin-top: 100px; */
 `;

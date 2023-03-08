@@ -45,76 +45,139 @@ const Detailpage = (item) => {
         </ImgBox>
       </DetailBoxTop>
 
-      <DetailBoxBottom>
-        <UserinfoBox>
-          <UserBox>{data?.userName}님이 호스팅하는 숙소</UserBox>
-          <UsersmallInfoBox>
-            최대 인원 {data?.maxPeople}명 · 침실 {data?.bedRoom}개 · 침대{" "}
-            {data?.bedNum}개 · 욕실 {data?.bathRoom}개
-          </UsersmallInfoBox>
-        </UserinfoBox>
-        <CheckinbigBox>
-          <CheckinBox>
-            <TbKey className="TbKey" />
-            <HCBox>
-              <HCTitle>셀프 체크인</HCTitle>
-              <HCText>열쇠 보관함을 이용해 체크인하세요</HCText>
-            </HCBox>
-          </CheckinBox>
+      <RescardAndDetail>
+        <DetailBoxBottom>
+          <UserinfoBox>
+            <UserBox>{data?.userName}님이 호스팅하는 숙소</UserBox>
+            <UsersmallInfoBox>
+              최대 인원 {data?.maxPeople}명 · 침실 {data?.bedRoom}개 · 침대{" "}
+              {data?.bedNum}개 · 욕실 {data?.bathRoom}개
+            </UsersmallInfoBox>
+          </UserinfoBox>
+          <CheckinbigBox>
+            <CheckinBox>
+              <TbKey className="TbKey" />
+              <HCBox>
+                <HCTitle>셀프 체크인</HCTitle>
+                <HCText>열쇠 보관함을 이용해 체크인하세요</HCText>
+              </HCBox>
+            </CheckinBox>
 
-          <CheckinBox>
-            <RiSuitcaseLine className="RiSuitcaseLine" />
-            <HCBox>
-              <HCTitle>{data?.userName}님은 슈퍼호스트입니다</HCTitle>
-              <HCText>슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며</HCText>
-              <HCText>
-                게스트가 숙소에서 편안히 머무를 수 있도록 최선을 다하는
-                호스트입니다.
-              </HCText>
-            </HCBox>
-          </CheckinBox>
+            <CheckinBox>
+              <RiSuitcaseLine className="RiSuitcaseLine" />
+              <HCBox>
+                <HCTitle>{data?.userName}님은 슈퍼호스트입니다</HCTitle>
+                <HCText>슈퍼호스트는 풍부한 경험과 높은 평점을 자랑하며</HCText>
+                <HCText>
+                  게스트가 숙소에서 편안히 머무를 수 있도록 최선을 다하는
+                  호스트입니다.
+                </HCText>
+              </HCBox>
+            </CheckinBox>
 
-          <CheckinBox>
-            <TbLocation className="TbLocation" />
-            <HCBox>
-              <HCTitle>훌륭한 숙소 위치</HCTitle>
-              <HCText>
-                최근 숙박한 게스트 중 95%가 위치에 별점 5점을 준 숙소입니다.
-              </HCText>
-            </HCBox>
-          </CheckinBox>
-        </CheckinbigBox>
-        <AirCoverBox>
-          <Aircovertitle>
-            <Aircoverred>에어</Aircoverred>
-            <Aircoverblack>커버</Aircoverblack>
-          </Aircovertitle>
-          <Aircoverinfo>
-            모든 예약에는 호스트가 예약을 취소하거나 숙소 정보가 정확하지 않은
-            경우 또는 체크인에 문제가 있는 상황에 대비한 무료 보호 프로그램이
-            포함됩니다.
-          </Aircoverinfo>
-        </AirCoverBox>
-        <DescriptionBox>{data?.explaination}</DescriptionBox>
+            <CheckinBox>
+              <TbLocation className="TbLocation" />
+              <HCBox>
+                <HCTitle>훌륭한 숙소 위치</HCTitle>
+                <HCText>
+                  최근 숙박한 게스트 중 95%가 위치에 별점 5점을 준 숙소입니다.
+                </HCText>
+              </HCBox>
+            </CheckinBox>
+          </CheckinbigBox>
+          <AirCoverBox>
+            <Aircovertitle>
+              <Aircoverred>에어</Aircoverred>
+              <Aircoverblack>커버</Aircoverblack>
+            </Aircovertitle>
+            <Aircoverinfo>
+              모든 예약에는 호스트가 예약을 취소하거나 숙소 정보가 정확하지 않은
+              경우 또는 체크인에 문제가 있는 상황에 대비한 무료 보호 프로그램이
+              포함됩니다.
+            </Aircoverinfo>
+          </AirCoverBox>
+          <DescriptionBox>{data?.explaination}</DescriptionBox>
 
-        <FacilityBox>
-          <FacilTitle>숙소 편의시설 🏠</FacilTitle>
-          <FacilBox>
-            <Facilities>{data?.facilities[0]?.type}</Facilities>
-            <Facilities>{data?.facilities[1]?.type}</Facilities>
-            <Facilities>{data?.facilities[2]?.type}</Facilities>
-            <Facilities>{data?.facilities[3]?.type}</Facilities>
-            <Facilities>{data?.facilities[4]?.type}</Facilities>
-            <Facilities>{data?.facilities[5]?.type}</Facilities>
-            <Facilities>{data?.facilities[6]?.type}</Facilities>
-          </FacilBox>
-        </FacilityBox>
-      </DetailBoxBottom>
+          <FacilityBox>
+            <FacilTitle>숙소 편의시설 🏠</FacilTitle>
+            <FacilBox>
+              <Facilities>{data?.facilities[0]?.type}</Facilities>
+              <Facilities>{data?.facilities[1]?.type}</Facilities>
+              <Facilities>{data?.facilities[2]?.type}</Facilities>
+              <Facilities>{data?.facilities[3]?.type}</Facilities>
+              <Facilities>{data?.facilities[4]?.type}</Facilities>
+              <Facilities>{data?.facilities[5]?.type}</Facilities>
+              <Facilities>{data?.facilities[6]?.type}</Facilities>
+            </FacilBox>
+          </FacilityBox>
+        </DetailBoxBottom>
+        <ResCard>
+          <PriceTag>₩{data?.price}/박</PriceTag>
+          <StarBox>
+            <BsStarFill className="StarLogo" />
+            <Count>{data?.likesNum}</Count>
+            <Dot>·</Dot>
+            <ReviewNumBox>후기 {data?.reviewNum}개</ReviewNumBox>
+          </StarBox>
+
+          <StButton>메인으로 이동</StButton>
+          <Restext>항해비엔비에서</Restext>
+          <Restext>더 다양한 숙소를</Restext>
+          <Restext>만나보세요!</Restext>
+          <HHBNBtext>HangHaeBnB</HHBNBtext>
+        </ResCard>
+      </RescardAndDetail>
     </>
   );
 };
 
 export default Detailpage;
+
+const HHBNBtext = styled.div`
+  margin-top: 30px;
+  border-top: 1px solid gray;
+`;
+
+const Restext = styled.div`
+  background-color: white;
+`;
+
+const StButton = styled.button`
+  border-radius: 7px;
+  background-color: #ff006a;
+  width: 150px;
+  height: 35px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  margin-left: 8px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+`;
+
+const PriceTag = styled.div`
+  font-size: 160%;
+  font-weight: bolder;
+  color: black;
+`;
+
+const ResCard = styled.div`
+  width: 170px;
+  height: 320px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  position: sticky;
+  top: 15%;
+  margin-top: 40px;
+  box-shadow: 0px 0px 15px 0px #a3a3a3;
+  padding: 30px;
+`;
+
+const RescardAndDetail = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const FacilityBox = styled.div`
   padding-bottom: 40px;
