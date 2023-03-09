@@ -9,9 +9,8 @@ const Header2 = () => {
         <div>당신의 공간을 에어비앤비하세요</div>
         <div>{localStorage.getItem("name")}</div>
         <button>로그아웃</button>
-      </Profile> 
+      </Profile>
     </HeaderContainer>
-  
   );
 };
 

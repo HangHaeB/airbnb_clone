@@ -7,6 +7,7 @@ import { BsStarFill } from "react-icons/bs";
 
 const Card = ({ item }) => {
   const navigate = useNavigate();
+
   return (
     <CardBox>
       <ImgBox

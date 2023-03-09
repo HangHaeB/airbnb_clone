@@ -12,8 +12,6 @@ const Home = () => {
     onSuccess: (response) => {},
   });
 
-  console.log(data);
-
   return (
     <>
       <TopBox>
@@ -22,8 +20,8 @@ const Home = () => {
       </TopBox>
 
       <Wrap>
-        {data?.map((item) => {
-          return <Card item={item} />;
+        {data?.map((item, i) => {
+          return <Card key={i} item={item} />;
         })}
       </Wrap>
 
