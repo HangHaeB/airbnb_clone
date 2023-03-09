@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getCookie, removeCookie } from "./cookies";
 import moment from "moment";
+
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_SERVER_URL}`,
   timeout: 10000,
@@ -13,6 +14,7 @@ instance.interceptors.request.use(
   //요청을 보내기 전 수행
   function (config) {
     const accessToken = getCookie("ACCESS_TOKEN");
+
     // const refreshToken = getCookie("RT_TOKEN");
     // // const expireAt = localStorage.getItem("expiresAt");
 
@@ -38,6 +40,11 @@ instance.interceptors.response.use(
     return config;
   },
 
-  function (error) {},
+  function (error) {
+    // if (error.response.statusCode === 400) {
+    //   alert("데이터 수신중에 오류가 났어요!!!");
+    // }
+    return Promise.reject(error);
+  },
 );
 export default instance;

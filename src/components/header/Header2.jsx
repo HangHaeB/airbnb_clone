@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
 import Login from "../modal/Login";
 import "./header.css";
-import { getCookie } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-const Header2 = () => {
+import SignUp from "./../modal/SignUp";
+import { removeCookie } from "./../../api/cookies";
+const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
-  const [modal, setModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
   const [showNavUser, setShowNavUser] = useState(false);
-  const showNavUserBtn = () => setShowNavUser((showNavUser) => !showNavUser);
-  const showLoginModal = () => setLoginModal((loginModal) => !loginModal);
+  const [isLogin, setIsLogin] = useState(false);
+  const showNavUserBtn = () => {
+    setShowNavUser((showNavUser) => !showNavUser);
+  };
+  const showLoginModal = () => {
+    setLoginModal((loginModal) => !loginModal);
+    removeCookie("ACCESS_TOKEN");
+    removeCookie("RT_TOKEN");
+  };
+  const outside = useRef();
 
   const navigate = useNavigate();
   const goToDetail = () => {
@@ -21,19 +30,15 @@ const Header2 = () => {
     navigate(`/mypage`);
   };
   return (
-    <HeaderContainer>
+    <HeaderContainer className="header">
       <Link to="/">
         <Img src={logo} alt="logo" />
       </Link>
+
       <NavBar>
         <Nav>
           <Profile>
             <div>{localStorage.getItem("name")}님</div>
-            {loginModal ? (
-              <NavBarBtn onClick={showLoginModal}>로그아웃</NavBarBtn>
-            ) : (
-              <NavBarBtn onClick={showLoginModal}>로그인</NavBarBtn>
-            )}
           </Profile>
           <NavBarBtn>
             <i className="fas fa-globe"></i>
@@ -48,11 +53,15 @@ const Header2 = () => {
           </NavUserBtn>
           {showNavUser && (
             <NavUser>
-              <UserBar>
+              <UserBar
+                onClick={() => {
+                  setSignUpModal(!signUpModal);
+                }}
+              >
                 <strong>회원 가입</strong>
               </UserBar>
 
-              <UserBar onClick={() => setModal(!modal)}>로그인</UserBar>
+              <UserBar onClick={() => setLoginModal(!loginModal)}>로그인</UserBar>
               <Line />
               <UserBar>숙소 호스트 되기</UserBar>
               <UserBar onClick={goToMypage}>마이페이지</UserBar>
@@ -61,21 +70,45 @@ const Header2 = () => {
           )}
         </Nav>
       </NavBar>
+
+      {loginModal === true ? (
+        <Modal>
+          <Login setLoginModal={setLoginModal} />
+        </Modal>
+      ) : null}
+      {signUpModal === true ? (
+        <Modal>
+          <SignUp setSignUpModal={setSignUpModal} />
+        </Modal>
+      ) : null}
     </HeaderContainer>
   );
 };
 
-export default Header2;
+export default Header;
 
 const HeaderContainer = styled.div`
   width: 90vw;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 20px 150px;
   height: 40px;
-  margin: 0 auto;
+  margin: 20px auto;
+  align-items: center;
+  position: relative;
 `;
-
+const InputContainer = styled.div`
+  display: flex;
+`;
+const SearchInput1 = styled.input`
+  width: 200px;
+`;
+const SearchInput2 = styled.input`
+  width: 200px;
+`;
+const SearchInput3 = styled.input`
+  width: 200px;
+`;
 const Img = styled.img`
   width: 118px;
 `;
@@ -85,6 +118,16 @@ const Profile = styled.div`
   gap: 30px;
 `;
 
+const Modal = styled.div`
+  position: absolute;
+  top: 600%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  height: 500px;
+  background-color: white;
+`;
 const Nav = styled.nav`
   display: flex;
   align-items: center;

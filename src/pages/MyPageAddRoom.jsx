@@ -20,7 +20,6 @@ const MyPageAddRoom = () => {
   const [category, setCategory] = useState();
   const [facilities, setFacilities] = useState([]);
 
-  //
   const imgRef = useRef();
   const saveImgFile = () => {
     const file = imgRef.current.files[0];
@@ -143,29 +142,29 @@ const MyPageAddRoom = () => {
           <FileLabel htmlFor="profileImg"></FileLabel>
           <FileInput type="file" accept="image/*" id="profileImg" onChange={saveImgFile} ref={imgRef} />
         </Card>
-        <form onSubmit={formHandler}>
-          <div>
+        <Form onSubmit={formHandler}>
+          <AddForm>
             <label>숙소이름 </label>
-            <input type="text" name="title" onChange={titleHandler} value={title} />
-          </div>
-          <div>
+            <StInput type="text" name="title" onChange={titleHandler} value={title} />
+          </AddForm>
+          <AddForm>
             <label>숙소설명 </label>
-            <input type="text" name="explaination" onChange={detailHandler} value={explaination} />
-          </div>
-          <div>
+            <StInput type="text" name="explaination" onChange={detailHandler} value={explaination} />
+          </AddForm>
+          <AddForm>
             <label>숙소가격 </label>
-            <input type="number" onChange={priceHandler} name="price" value={price} />
-          </div>
-          <div>
+            <StInput type="number" onChange={priceHandler} name="price" value={price} />
+          </AddForm>
+          <AddForm>
             <label>숙소지역 </label>
-            <input type="text" onChange={locationHandler} name="location" value={location} />
-          </div>
-          <div>
+            <StInput type="text" onChange={locationHandler} name="location" value={location} />
+          </AddForm>
+          <AddForm>
             <label>숙소카테고리 </label>
             {bookingCategories.map((type) => {
               return (
                 <label>
-                  <input
+                  <RadioInput
                     type="radio"
                     checked={category === type}
                     onChange={radioHandler}
@@ -176,26 +175,26 @@ const MyPageAddRoom = () => {
                 </label>
               );
             })}
-          </div>
-          <div>
+          </AddForm>
+          <AddForm>
             <label>최대인원 </label>
-            <input type="number" onChange={maxPeopleHandler} name=" maxPeople" value={maxPeople} />
-          </div>
-          <div>
+            <StInput type="number" onChange={maxPeopleHandler} name=" maxPeople" value={maxPeople} />
+          </AddForm>
+          <AddForm>
             <label>거주형태 </label>
-            <select name="houseCase" onChange={houseHandler} value={houseCase}>
+            <StSelect name="houseCase" onChange={houseHandler} value={houseCase}>
               {options}
-            </select>
-          </div>
-          <div>
+            </StSelect>
+          </AddForm>
+          <AddForm>
             <label>침실 수 </label>
-            <input type="number" onChange={bedRoomHandler} name="bedRoom" value={bedRoom} />
-          </div>
-          <div>
+            <StInput type="number" onChange={bedRoomHandler} name="bedRoom" value={bedRoom} />
+          </AddForm>
+          <AddForm>
             <label>화장실 수 </label>
-            <input type="number" onChange={bathRoomHandler} name="bathRoom" value={bathRoom} />
-          </div>
-          <div>
+            <StInput type="number" onChange={bathRoomHandler} name="bathRoom" value={bathRoom} />
+          </AddForm>
+          <AddForm>
             <label>편의시설 </label>
             {facilityList.map((item) => {
               return (
@@ -211,9 +210,9 @@ const MyPageAddRoom = () => {
                 </label>
               );
             })}
-          </div>
-          <button>등록하기</button>
-        </form>
+          </AddForm>
+          <StBtn>등록하기</StBtn>
+        </Form>
       </ContentContainer>
       <Footer />
     </div>
@@ -223,7 +222,6 @@ const MyPageAddRoom = () => {
 export default MyPageAddRoom;
 
 const ContentContainer = styled.div`
-  background-color: #fbb2b5;
   margin: 0px 150px;
   height: 70vh;
   display: flex;
@@ -248,4 +246,41 @@ const Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid #fbb2b5;
+`;
+
+const Form = styled.form`
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
+
+const AddForm = styled.div`
+  height: 50px;
+  display: flex;
+  align-items: baseline;
+  font-size: 20px;
+  font-weight: 900;
+  gap: 20px;
+`;
+
+const StInput = styled.input`
+  height: 50px;
+  min-width: 400px;
+  padding-left: 20px;
+`;
+const RadioInput = styled.input`
+  min-width: 50px;
+`;
+const StSelect = styled.select`
+  height: 50px;
+  min-width: 50px;
+  padding-left: 20px;
+`;
+
+const StBtn = styled.button`
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;
 `;

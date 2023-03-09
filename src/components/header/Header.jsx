@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
 import Login from "../modal/Login";
 import "./header.css";
-import { getCookie } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SignUp from "./../modal/SignUp";
+import { removeCookie } from "./../../api/cookies";
 const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
-  const [modal, setModal] = useState(false);
   const [showNavUser, setShowNavUser] = useState(false);
-  const showNavUserBtn = () => setShowNavUser((showNavUser) => !showNavUser);
-  const showLoginModal = () => setLoginModal((loginModal) => !loginModal);
+  const [isLogin, setIsLogin] = useState(false);
+  const showNavUserBtn = () => {
+    setShowNavUser((showNavUser) => !showNavUser);
+  };
+  const showLoginModal = () => {
+    setLoginModal((loginModal) => !loginModal);
+    removeCookie("ACCESS_TOKEN");
+    removeCookie("RT_TOKEN");
+    localStorage.removeItem("name");
+    window.location.reload();
+  };
+  const outside = useRef();
 
   const navigate = useNavigate();
   const goToDetail = () => {
@@ -42,12 +51,7 @@ const Header = () => {
             <div class="query__column query__location">
               <div class="query__column-title">위치</div>
               <div>
-                <input
-                  type="text"
-                  name="search-query-location"
-                  id="search-query-location"
-                  placeholder="어디로 여행가십니까"
-                />
+                <input type="text" name="search-query-location" placeholder="어디로 여행가십니까" />
               </div>
             </div>
             <div class="divider"></div>
@@ -106,11 +110,6 @@ const Header = () => {
         <Nav>
           <Profile>
             <div>{localStorage.getItem("name")}님</div>
-            {loginModal ? (
-              <NavBarBtn onClick={showLoginModal}>로그아웃</NavBarBtn>
-            ) : (
-              <NavBarBtn onClick={showLoginModal}>로그인</NavBarBtn>
-            )}
           </Profile>
           <NavBarBtn>
             <i className="fas fa-globe"></i>
@@ -142,15 +141,15 @@ const Header = () => {
           )}
         </Nav>
       </NavBar>
+
       {loginModal === true ? (
         <Modal>
-          <Login />
+          <Login setLoginModal={setLoginModal} />
         </Modal>
       ) : null}
-
       {signUpModal === true ? (
         <Modal>
-          <SignUp />
+          <SignUp setSignUpModal={setSignUpModal} />
         </Modal>
       ) : null}
     </HeaderContainer>
@@ -167,19 +166,10 @@ const HeaderContainer = styled.div`
   height: 40px;
   margin: 20px auto;
   align-items: center;
+  position: relative;
+  background-color: white;
 `;
-const InputContainer = styled.div`
-  display: flex;
-`;
-const SearchInput1 = styled.input`
-  width: 200px;
-`;
-const SearchInput2 = styled.input`
-  width: 200px;
-`;
-const SearchInput3 = styled.input`
-  width: 200px;
-`;
+
 const Img = styled.img`
   width: 118px;
 `;
@@ -191,9 +181,13 @@ const Profile = styled.div`
 
 const Modal = styled.div`
   position: absolute;
-  top: 50%;
+  top: 300%;
   left: 50%;
   transform: translate(-50%, -50%);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  height: 500px;
+  background-color: white;
 `;
 const Nav = styled.nav`
   display: flex;
@@ -227,7 +221,7 @@ const NavUserBtn = styled.div`
   border: 1px solid gray;
 `;
 const NavUser = styled.div`
-  border: 1px solid red;
+  border: 1px solid gray;
   position: absolute;
   top: 90px;
   right: 150px;

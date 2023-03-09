@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Header from "./../components/header/Header";
 import Footer from "./../components/footer/Footer";
-import { getCard } from "../api/api";
+import { getCard, filterCategory } from "../api/api";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -21,7 +21,7 @@ const Home = () => {
 
   const getItems = useCallback(async () => {
     setLoading(true);
-    await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/houses?page={idx}`).then((res) => {
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/houses?page=1&size=24`).then((res) => {
       setItems((prevState) => [...prevState, res]);
     });
     setLoading(false);
@@ -49,8 +49,6 @@ const Home = () => {
 
   return (
     <>
-      <Header />
-
       {/* <div className="list">
         {items.map((item, idx) => (
           <React.Fragment key={idx}>
@@ -71,8 +69,8 @@ const Home = () => {
       </TopBox>
 
       <Wrap>
-        {data?.map((item) => {
-          return <Card item={item} key={item.id} />;
+        {data?.map((item, i) => {
+          return <Card key={i} item={item} />;
         })}
       </Wrap>
 

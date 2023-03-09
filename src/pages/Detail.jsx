@@ -10,9 +10,9 @@ const Detail = () => {
       <TopBox>
         <Header />
       </TopBox>
-      <StMiddleBox>
+      <DetailWholeBox>
         <Detailpage />
-      </StMiddleBox>
+      </DetailWholeBox>
       <Footer />
     </>
   );
@@ -21,6 +21,7 @@ const Detail = () => {
 export default Detail;
 
 const TopBox = styled.div`
+  width: 1200px;
   position: sticky;
   top: 0%;
   z-index: 1;
@@ -28,15 +29,7 @@ const TopBox = styled.div`
   border-bottom: 1px solid #a8a8a86e;
 `;
 
-const StMiddleBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 50%;
-  margin: 40px auto;
-  box-sizing: border-box;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  overflow-x: hidden;
+const DetailWholeBox = styled.div`
+  width: 1200px;
+  margin: 0 auto;
 `;

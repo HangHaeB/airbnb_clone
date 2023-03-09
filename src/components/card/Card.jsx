@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-
 import { RiHeart3Line, RiHeart3Fill } from "react-icons/ri";
 import { BsStarFill } from "react-icons/bs";
 
 const Card = ({ item }) => {
   const navigate = useNavigate();
+
   return (
     <CardBox>
       <ImgBox

@@ -1,27 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  TbTent,
-  TbBuildingCastle,
-  TbSeeding,
-  TbBuildingCottage,
-  TbBuildingCommunity,
-} from "react-icons/tb";
-import {
-  MdOutlineCastle,
-  MdOutlineHotel,
-  MdOutlineHouse,
-} from "react-icons/md";
+import { TbTent, TbBuildingCastle, TbSeeding, TbBuildingCottage, TbBuildingCommunity } from "react-icons/tb";
+import { MdOutlineCastle, MdOutlineHotel, MdOutlineHouse } from "react-icons/md";
 import { BiSwim } from "react-icons/bi";
 import { HiOutlineSparkles } from "react-icons/hi";
-import {
-  RiShipLine,
-  RiAncientGateLine,
-  RiAncientPavilionLine,
-} from "react-icons/ri";
+import { RiShipLine, RiAncientGateLine, RiAncientPavilionLine } from "react-icons/ri";
 import { CgTrees } from "react-icons/cg";
-
+import { useQuery } from "react-query";
+// import { getCard, filterCategory } from "../api/api";
 const Index = () => {
+  // const [keyword, setKeyword] = useState();
+  // const onClickHandler = () => {
+  //   setKeyword(e.target.value);
+  // };
+  // const { data2 } = useQuery("filterKeyword", () => filterCategory(keyword, 1));
+  // console.log(data2);
   return (
     <CategoryBox>
       <Case1>
@@ -103,6 +96,7 @@ const CategoryBox = styled.div`
   justify-content: center;
   border-top: 1px solid #a8a8a86e;
   padding-top: 10px;
+  margin-top: 100px;
 `;
 
 const Case1 = styled.div`

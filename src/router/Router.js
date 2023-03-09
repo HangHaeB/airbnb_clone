@@ -12,9 +12,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:id" element={<Detail />} />
-        <Route path="/mypage" element={<MyPageReservation />} />
-        <Route path="/mypage/addroom" element={<MyPageAddRoom />} />
-        <Route path="/mypage/wishlist" element={<MyPageWishList />} />
+        <Route path="/mypage" element={<MyPageAddRoom />} />
         {/* <Route path="/oauth/callback/kakao" component={kakao}></Route> */}
       </Routes>
     </BrowserRouter>

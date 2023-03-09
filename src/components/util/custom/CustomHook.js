@@ -1,13 +1,30 @@
-import { useState, useCallback } from "react";
+// import React, { useState, useEffect, useCallback } from "react";
+// import axios from "axios";
 
-function useInputs(initialForm) {
-  const [form, setForm] = useState(initialForm);
-  const onChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setForm((form) => ({ ...form, [name]: value }));
-  }, []);
-  const reset = useCallback(() => setForm(initialForm), [initialForm]);
-  return [form, onChange, reset];
-}
+// function useFetch(query, page) {
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(false);
+//   const [list, setList] = useState([]);
+//   const [hasMore, setHasMore] = useState(false);
 
-export default useInputs;
+//   const sendQuery = useCallback(async () => {
+//     try {
+//       await setLoading(true);
+//       await setError(false);
+//       const res = await axios.get(url);
+//       await setList((prev) => [...new Set([...prev, ...res.data])]);
+//       await setHasMore(res.data.docs.length > 0);
+//       setLoading(false);
+//     } catch (err) {
+//       setError(err);
+//     }
+//   }, [query, page]);
+
+//   useEffect(() => {
+//     sendQuery(query);
+//   }, [query, sendQuery, page]);
+
+//   return { loading, error, list, hasMore };
+// }
+
+// export default useFetch;
