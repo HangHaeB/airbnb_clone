@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import logo from "../util/img/Airbnb_Logo.png";
 import styled from "styled-components";
+import Login from "../modal/Login";
+import SignUp from "../modal/SignUp";
+
 const Header = () => {
+  const [loginModal, setLoginModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
+  const outside = useRef();
+
   return (
     <HeaderContainer>
       <Img src={logo} alt="logo" />
@@ -12,9 +19,34 @@ const Header = () => {
       </InputContainer>
       <Profile>
         <div>당신의 공간을 에어비앤비하세요</div>
-        <div>{localStorage.getItem("name")}</div>
-        <button>로그아웃</button>
+        <div>{localStorage.getItem("name")}님</div>
+        <button
+          onClick={() => {
+            setLoginModal(!loginModal);
+          }}
+        >
+          로그인
+        </button>
+        <button
+          onClick={() => {
+            setSignUpModal(!signUpModal);
+          }}
+        >
+          회원가입
+        </button>
       </Profile>
+
+      {loginModal === true ? (
+        <Modal>
+          <Login setLoginModal={setLoginModal} />
+        </Modal>
+      ) : null}
+
+      {signUpModal === true ? (
+        <Modal>
+          <SignUp setSignUpModal={setSignUpModal} />
+        </Modal>
+      ) : null}
     </HeaderContainer>
   );
 };
@@ -48,4 +80,15 @@ const Img = styled.img`
 const Profile = styled.div`
   display: flex;
   gap: 30px;
+`;
+
+const Modal = styled.div`
+  position: absolute;
+  top: 300%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  height: 500px;
+  background-color: white;
 `;
