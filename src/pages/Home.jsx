@@ -7,6 +7,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import Card from "./../components/card/Card";
 import styled from "styled-components";
+import Index from "./../components/home/Index";
 
 const Home = () => {
   const [items, setItems] = useState([]);
@@ -64,29 +65,48 @@ const Home = () => {
         ))}
       </div> */}
 
+      <TopBox>
+        <Header />
+        <Index />
+      </TopBox>
+
       <Wrap>
         {data?.map((item) => {
           return <Card item={item} key={item.id} />;
         })}
       </Wrap>
 
-      <Footer />
+      <BottomBox>
+        <Footer />
+      </BottomBox>
     </>
   );
 };
 
 export default Home;
 
+const TopBox = styled.div`
+  position: sticky;
+  top: 0%;
+  z-index: 1;
+  background-color: white;
+  border-bottom: 1px solid #a8a8a86e;
+`;
+
 const Wrap = styled.div`
-  width: 90%;
-  height: 80vh;
-  overflow-y: scroll;
-  margin: 100px auto;
   display: flex;
+  gap: 25px;
   flex-wrap: wrap;
-  box-sizing: border-box;
-  gap: 30px;
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  justify-content: center;
+  padding-top: 50px;
+  overflow: hidden;
+`;
+
+const BottomBox = styled.div`
+  position: sticky;
+  bottom: 0%;
+  z-index: 1;
+  background-color: white;
+  border-top: 1px solid #a8a8a86e;
+  margin-top: 100px;
 `;

@@ -2,30 +2,39 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+
+import { RiHeart3Line, RiHeart3Fill } from "react-icons/ri";
+import { BsStarFill } from "react-icons/bs";
+
 const Card = ({ item }) => {
   const navigate = useNavigate();
   return (
     <CardBox>
-      <ImgBox>
+      <ImgBox
+        onClick={() => {
+          navigate(`/${item.id}`);
+        }}
+      >
         <ImgView src={item.imageUrl} alt="img" />
-        <Heart>♡</Heart>
+        <RiHeart3Line className="HeartLogo" />
+        <RiHeart3Fill className="HeartLogoBottom" />
       </ImgBox>
       <CardHeaderBox>
         <Title
           key={item.id}
           onClick={() => {
-            navigate(`/:${item.id}`);
+            navigate(`/${item.id}`);
           }}
         >
-          {item.title}
+          {item.location}
         </Title>
         <StarBox>
-          <Star>★</Star>
+          <BsStarFill className="StarLogo" />
           <Count>{item.likesNum}</Count>
         </StarBox>
       </CardHeaderBox>
       <CardInfoBox>
-        <LocationBox>{item.location}</LocationBox>
+        <LocationBox>{item.distance}km 거리</LocationBox>
         <PriceBox>₩{item.price}/박</PriceBox>
       </CardInfoBox>
     </CardBox>
@@ -46,9 +55,8 @@ const PriceBox = styled.div`
 `;
 
 const CardBox = styled.div`
-  width: 300px;
-  height: 400px;
-  text-align: center;
+  width: 250px;
+  height: 350px;
 `;
 
 const Title = styled.div`
@@ -59,19 +67,44 @@ const Title = styled.div`
   font-weight: bold;
 `;
 
-const ImgBox = styled.div`
-  width: 300px;
-  height: 300px;
+const StarBox = styled.div`
+  gap: 5px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2px;
+  .StarLogo {
+    font-size: 14px;
+    color: black;
+    margin-top: 10px;
+  }
+`;
 
+const ImgBox = styled.div`
+  width: 250px;
+  height: 250px;
   position: relative;
   background-color: gray;
   border-radius: 15px;
   cursor: pointer;
+  .HeartLogo {
+    position: absolute;
+    top: 10%;
+    left: 80%;
+    font-size: 30px;
+    color: white;
+  }
+  .HeartLogoBottom {
+    position: absolute;
+    top: 10%;
+    left: 80%;
+    font-size: 30px;
+    color: #00000057;
+  }
 `;
 
 const ImgView = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 15px;
 `;
 
@@ -83,33 +116,8 @@ const Count = styled.div`
   margin-top: 0px;
 `;
 
-const Star = styled.div`
-  /* width: 20px;
-  height: 20px; */
-  font-size: 20px;
-  /* position: absolute;
-  top: 80%;
-  left: 80%; */
-  color: black;
-`;
-
-const Heart = styled.div`
-  font-size: 25px;
-  position: absolute;
-  top: 0%;
-  left: 80%;
-  color: rgba(231, 231, 231, 0.829);
-`;
-
 const CardHeaderBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`;
-
-const StarBox = styled.div`
-  gap: 3px;
-  display: flex;
-  flex-direction: row;
-  margin-top: 2px;
 `;

@@ -6,8 +6,10 @@ import "./header.css";
 import { getCookie } from "../../api/cookies";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import SignUp from "./../modal/SignUp";
 const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
   const [modal, setModal] = useState(false);
   const [showNavUser, setShowNavUser] = useState(false);
   const showNavUserBtn = () => setShowNavUser((showNavUser) => !showNavUser);
@@ -123,11 +125,15 @@ const Header = () => {
           </NavUserBtn>
           {showNavUser && (
             <NavUser>
-              <UserBar>
+              <UserBar
+                onClick={() => {
+                  setSignUpModal(!signUpModal);
+                }}
+              >
                 <strong>회원 가입</strong>
               </UserBar>
 
-              <UserBar onClick={() => setModal(!modal)}>로그인</UserBar>
+              <UserBar onClick={() => setLoginModal(!loginModal)}>로그인</UserBar>
               <Line />
               <UserBar>숙소 호스트 되기</UserBar>
               <UserBar onClick={goToMypage}>마이페이지</UserBar>
@@ -136,7 +142,17 @@ const Header = () => {
           )}
         </Nav>
       </NavBar>
-      {modal ? <Login /> : null}
+      {loginModal === true ? (
+        <Modal>
+          <Login />
+        </Modal>
+      ) : null}
+
+      {signUpModal === true ? (
+        <Modal>
+          <SignUp />
+        </Modal>
+      ) : null}
     </HeaderContainer>
   );
 };

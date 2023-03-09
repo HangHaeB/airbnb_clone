@@ -13,9 +13,13 @@ const Footer = () => {
 export default Footer;
 
 const FooterContainer = styled.div`
-  position: absolute;
+  /* position: absolute;
   z-index: 99;
   bottom: 0;
   width: 90vw;
-  padding: 20px;
+  padding: 20px; */
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  padding-bottom: 10px;
 `;
